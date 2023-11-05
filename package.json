@@ -11,7 +11,9 @@
   "dependencies": {
     "@tauri-apps/api": "^1.5.1",
     "@zag-js/solid": "^0.27.1",
+    "apexcharts": "^3.44.0",
     "daisyui": "^3.9.4",
+    "solid-apexcharts": "^0.3.2",
     "solid-js": "^1.7.8",
     "yaml": "^2.3.4"
   },

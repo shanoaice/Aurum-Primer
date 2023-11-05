@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:6.9.1"],\
           ["@typescript-eslint/parser", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:6.9.1"],\
           ["@zag-js/solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.27.1"],\
+          ["apexcharts", "npm:3.44.0"],\
           ["daisyui", "npm:3.9.4"],\
           ["eslint", "npm:8.53.0"],\
           ["eslint-config-xo", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.43.1"],\
@@ -44,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-unicorn", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:49.0.0"],\
           ["postcss", "npm:8.4.31"],\
           ["prettier", "npm:3.0.3"],\
+          ["solid-apexcharts", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.3.2"],\
           ["solid-js", "npm:1.8.5"],\
           ["tailwindcss", "npm:3.3.5"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
@@ -1394,6 +1396,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@yr/monotone-cubic-spline", [\
+      ["npm:1.0.3", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/@yr-monotone-cubic-spline-npm-1.0.3-a6469f7958-10c0.zip/node_modules/@yr/monotone-cubic-spline/",\
+        "packageDependencies": [\
+          ["@yr/monotone-cubic-spline", "npm:1.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@zag-js/core", [\
       ["npm:0.27.1", {\
         "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/@zag-js-core-npm-0.27.1-9c2623e783-10c0.zip/node_modules/@zag-js/core/",\
@@ -1586,6 +1597,22 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["apexcharts", [\
+      ["npm:3.44.0", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/apexcharts-npm-3.44.0-a30d1cbbdd-10c0.zip/node_modules/apexcharts/",\
+        "packageDependencies": [\
+          ["apexcharts", "npm:3.44.0"],\
+          ["@yr/monotone-cubic-spline", "npm:1.0.3"],\
+          ["svg.draggable.js", "npm:2.2.2"],\
+          ["svg.easing.js", "npm:2.0.0"],\
+          ["svg.filter.js", "npm:2.0.2"],\
+          ["svg.pathmorphing.js", "npm:0.1.3"],\
+          ["svg.resize.js", "npm:1.4.3"],\
+          ["svg.select.js", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["arg", [\
       ["npm:5.0.2", {\
         "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/arg-npm-5.0.2-2f5805a547-10c0.zip/node_modules/arg/",\
@@ -1733,6 +1760,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:6.9.1"],\
           ["@typescript-eslint/parser", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:6.9.1"],\
           ["@zag-js/solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.27.1"],\
+          ["apexcharts", "npm:3.44.0"],\
           ["daisyui", "npm:3.9.4"],\
           ["eslint", "npm:8.53.0"],\
           ["eslint-config-xo", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.43.1"],\
@@ -1746,6 +1774,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-unicorn", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:49.0.0"],\
           ["postcss", "npm:8.4.31"],\
           ["prettier", "npm:3.0.3"],\
+          ["solid-apexcharts", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.3.2"],\
           ["solid-js", "npm:1.8.5"],\
           ["tailwindcss", "npm:3.3.5"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
@@ -2316,6 +2345,15 @@ const RAW_RUNTIME_STATE =
           ["define-data-property", "npm:1.1.1"],\
           ["has-property-descriptors", "npm:1.0.1"],\
           ["object-keys", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["defu", [\
+      ["npm:6.1.3", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/defu-npm-6.1.3-7bbdfb927f-10c0.zip/node_modules/defu/",\
+        "packageDependencies": [\
+          ["defu", "npm:6.1.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5723,6 +5761,33 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["solid-apexcharts", [\
+      ["npm:0.3.2", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/solid-apexcharts-npm-0.3.2-d84a10bc0a-10c0.zip/node_modules/solid-apexcharts/",\
+        "packageDependencies": [\
+          ["solid-apexcharts", "npm:0.3.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.3.2", {\
+        "packageLocation": "./.yarn/__virtual__/solid-apexcharts-virtual-3d70965e9c/4/C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/solid-apexcharts-npm-0.3.2-d84a10bc0a-10c0.zip/node_modules/solid-apexcharts/",\
+        "packageDependencies": [\
+          ["solid-apexcharts", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.3.2"],\
+          ["@types/apexcharts", null],\
+          ["@types/solid-js", null],\
+          ["apexcharts", "npm:3.44.0"],\
+          ["defu", "npm:6.1.3"],\
+          ["solid-js", "npm:1.8.5"]\
+        ],\
+        "packagePeers": [\
+          "@types/apexcharts",\
+          "@types/solid-js",\
+          "apexcharts",\
+          "solid-js"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["solid-js", [\
       ["npm:1.8.5", {\
         "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/solid-js-npm-1.8.5-628d715bad-10c0.zip/node_modules/solid-js/",\
@@ -5987,6 +6052,84 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/supports-preserve-symlinks-flag-npm-1.0.0-f17c4d0028-10c0.zip/node_modules/supports-preserve-symlinks-flag/",\
         "packageDependencies": [\
           ["supports-preserve-symlinks-flag", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.draggable.js", [\
+      ["npm:2.2.2", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.draggable.js-npm-2.2.2-91cd7475f3-10c0.zip/node_modules/svg.draggable.js/",\
+        "packageDependencies": [\
+          ["svg.draggable.js", "npm:2.2.2"],\
+          ["svg.js", "npm:2.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.easing.js", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.easing.js-npm-2.0.0-0c84ce8158-10c0.zip/node_modules/svg.easing.js/",\
+        "packageDependencies": [\
+          ["svg.easing.js", "npm:2.0.0"],\
+          ["svg.js", "npm:2.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.filter.js", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.filter.js-npm-2.0.2-f65ff6d47e-10c0.zip/node_modules/svg.filter.js/",\
+        "packageDependencies": [\
+          ["svg.filter.js", "npm:2.0.2"],\
+          ["svg.js", "npm:2.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.js", [\
+      ["npm:2.7.1", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.js-npm-2.7.1-c232ccf7aa-10c0.zip/node_modules/svg.js/",\
+        "packageDependencies": [\
+          ["svg.js", "npm:2.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.pathmorphing.js", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.pathmorphing.js-npm-0.1.3-83b910d5a4-10c0.zip/node_modules/svg.pathmorphing.js/",\
+        "packageDependencies": [\
+          ["svg.pathmorphing.js", "npm:0.1.3"],\
+          ["svg.js", "npm:2.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.resize.js", [\
+      ["npm:1.4.3", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.resize.js-npm-1.4.3-9e6b42a70f-10c0.zip/node_modules/svg.resize.js/",\
+        "packageDependencies": [\
+          ["svg.resize.js", "npm:1.4.3"],\
+          ["svg.js", "npm:2.7.1"],\
+          ["svg.select.js", "npm:2.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["svg.select.js", [\
+      ["npm:2.1.2", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.select.js-npm-2.1.2-d8be268fcb-10c0.zip/node_modules/svg.select.js/",\
+        "packageDependencies": [\
+          ["svg.select.js", "npm:2.1.2"],\
+          ["svg.js", "npm:2.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.0.1", {\
+        "packageLocation": "../../../C:/Users/Haoqing Chen/AppData/Local/Yarn/Berry/cache/svg.select.js-npm-3.0.1-9baa0ca5b5-10c0.zip/node_modules/svg.select.js/",\
+        "packageDependencies": [\
+          ["svg.select.js", "npm:3.0.1"],\
+          ["svg.js", "npm:2.7.1"]\
         ],\
         "linkType": "HARD"\
       }]\
