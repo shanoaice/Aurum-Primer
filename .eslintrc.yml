@@ -15,3 +15,34 @@ settings:
     node: true
   import/external-module-folders:
     - .yarn
+
+rules:
+  max-params: 0
+  "@typescript-eslint/naming-convention":
+    - error
+    - selector: default
+      format:
+        - strictCamelCase
+      leadingUnderscore: allow
+      trailingUnderscore: allow
+    - selector: import
+      format:
+        - camelCase
+        - PascalCase
+    - selector: variable
+      format:
+        - camelCase
+        - UPPER_CASE
+      leadingUnderscore: allow
+      trailingUnderscore: allow
+    - selector: typeLike
+      format: 
+        - PascalCase
+    - selector: 
+        - objectLiteralProperty
+        - typeProperty
+      format:
+        - snake_case
+        - strictCamelCase
+      leadingUnderscore: allow
+      trailingUnderscore: allow
