@@ -8,7 +8,7 @@ const IPV4_RANDOM_UPPER: u32 = (1 << 22) - 1;
 const IPV6_RANDOM_UPPER: u128 = (1 << 118) - 1;
 
 #[tauri::command]
-pub fn generate_random_ipv4_local() -> String {
+pub fn generate_random_ipv4_local_30() -> String {
     let mut rng = thread_rng();
     let ipv4_generated_offset: u32 = rng.gen_range(0..IPV4_RANDOM_UPPER);
     let ipv4_generated = PRIVATE_IPV4_BASE + (ipv4_generated_offset << 2);
@@ -19,7 +19,7 @@ pub fn generate_random_ipv4_local() -> String {
 }
 
 #[tauri::command]
-pub fn generate_random_ipv6_local() -> String {
+pub fn generate_random_ipv6_local_126() -> String {
     let mut rng = thread_rng();
     let ipv6_generated_offset: u128 = rng.gen_range(0..IPV6_RANDOM_UPPER);
     let ipv6_generated = PRIVATE_IPV6_BASE + (ipv6_generated_offset << 2);
