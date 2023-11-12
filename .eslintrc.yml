@@ -36,9 +36,9 @@ rules:
       leadingUnderscore: allow
       trailingUnderscore: allow
     - selector: typeLike
-      format: 
+      format:
         - PascalCase
-    - selector: 
+    - selector:
         - objectLiteralProperty
         - typeProperty
       format:
@@ -46,3 +46,12 @@ rules:
         - strictCamelCase
       leadingUnderscore: allow
       trailingUnderscore: allow
+    - selector: function
+      format:
+        - strictCamelCase
+        - PascalCase
+  unicorn/filename-case:
+    - error
+    - cases:
+        kebabCase: true
+        pascalCase: true
