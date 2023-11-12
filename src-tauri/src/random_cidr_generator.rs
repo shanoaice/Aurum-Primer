@@ -1,4 +1,3 @@
-#![feature(ip_bits)]
 use rand::{thread_rng, Rng};
 
 const PRIVATE_IPV4_BASE: u32 = 0x0a << 24;
