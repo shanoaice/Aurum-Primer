@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod singbox_manager;
+mod random_cidr_generator;
 
 fn main() {
     let initial_singbox_process = singbox_manager::SingBox::new();
@@ -13,7 +14,9 @@ fn main() {
             singbox_manager::start_singbox_process,
             singbox_manager::set_singbox_parameters,
             singbox_manager::reload_singbox_process,
-            singbox_manager::stop_singbox_process
+            singbox_manager::stop_singbox_process,
+			random_cidr_generator::generate_random_ipv4_local_30,
+			random_cidr_generator::generate_random_ipv6_local_126
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
