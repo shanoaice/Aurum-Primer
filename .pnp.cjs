@@ -26,6 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@nanostores/solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.4.2"],\
           ["@tauri-apps/api", "npm:1.5.1"],\
           ["@types/eslint", "npm:8.44.6"],\
           ["@typescript-eslint/eslint-plugin", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:6.9.1"],\
@@ -44,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:5.0.1"],\
           ["eslint-plugin-solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.13.0"],\
           ["eslint-plugin-unicorn", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:49.0.0"],\
+          ["nanostores", "npm:0.9.5"],\
           ["postcss", "npm:8.4.31"],\
           ["prettier", "npm:3.0.3"],\
           ["solid-apexcharts", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.3.2"],\
@@ -988,6 +990,32 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@nanostores/solid", [\
+      ["npm:0.4.2", {\
+        "packageLocation": "./.yarn/cache/@nanostores-solid-npm-0.4.2-0922c259a9-7b75bdc73c.zip/node_modules/@nanostores/solid/",\
+        "packageDependencies": [\
+          ["@nanostores/solid", "npm:0.4.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.4.2", {\
+        "packageLocation": "./.yarn/__virtual__/@nanostores-solid-virtual-3e8d4dbc9d/0/cache/@nanostores-solid-npm-0.4.2-0922c259a9-7b75bdc73c.zip/node_modules/@nanostores/solid/",\
+        "packageDependencies": [\
+          ["@nanostores/solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.4.2"],\
+          ["@types/nanostores", null],\
+          ["@types/solid-js", null],\
+          ["nanostores", "npm:0.9.5"],\
+          ["solid-js", "npm:1.8.5"]\
+        ],\
+        "packagePeers": [\
+          "@types/nanostores",\
+          "@types/solid-js",\
+          "nanostores",\
+          "solid-js"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@nodelib/fs.scandir", [\
       ["npm:2.1.5", {\
         "packageLocation": "./.yarn/cache/@nodelib-fs.scandir-npm-2.1.5-89c67370dd-732c3b6d1b.zip/node_modules/@nodelib/fs.scandir/",\
@@ -1756,6 +1784,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["aurum-primer", "workspace:."],\
+          ["@nanostores/solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.4.2"],\
           ["@tauri-apps/api", "npm:1.5.1"],\
           ["@types/eslint", "npm:8.44.6"],\
           ["@typescript-eslint/eslint-plugin", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:6.9.1"],\
@@ -1774,6 +1803,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:5.0.1"],\
           ["eslint-plugin-solid", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.13.0"],\
           ["eslint-plugin-unicorn", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:49.0.0"],\
+          ["nanostores", "npm:0.9.5"],\
           ["postcss", "npm:8.4.31"],\
           ["prettier", "npm:3.0.3"],\
           ["solid-apexcharts", "virtual:3243a35249f47c643511d3d6d394e8a281686340424e0d5277176d0247c7ef794fba2744f0ce560279cf4446109a80efb73e7e79cd6a3adece8e694b2d806e25#npm:0.3.2"],\
@@ -4771,6 +4801,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/nanoid-npm-3.3.6-e6d6ae7e71-606b355960.zip/node_modules/nanoid/",\
         "packageDependencies": [\
           ["nanoid", "npm:3.3.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["nanostores", [\
+      ["npm:0.9.5", {\
+        "packageLocation": "./.yarn/cache/nanostores-npm-0.9.5-d250245adb-5d6a336474.zip/node_modules/nanostores/",\
+        "packageDependencies": [\
+          ["nanostores", "npm:0.9.5"]\
         ],\
         "linkType": "HARD"\
       }]\
