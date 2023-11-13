@@ -28,7 +28,7 @@ rules:
     - selector: import
       format:
         - camelCase
-        - PascalCase
+        - StrictPascalCase
     - selector: variable
       format:
         - camelCase
@@ -37,7 +37,7 @@ rules:
       trailingUnderscore: allow
     - selector: typeLike
       format:
-        - PascalCase
+        - StrictPascalCase
     - selector:
         - objectLiteralProperty
         - typeProperty
@@ -49,7 +49,10 @@ rules:
     - selector: function
       format:
         - strictCamelCase
-        - PascalCase
+        - StrictPascalCase
+    - selector: enumMember
+      format:
+        - StrictPascalCase
   unicorn/filename-case:
     - error
     - cases:
