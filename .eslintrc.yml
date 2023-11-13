@@ -55,3 +55,7 @@ rules:
     - cases:
         kebabCase: true
         pascalCase: true
+parserOptions:
+  project:
+    - ./tsconfig.json
+    - ./tsconfig.node.json
