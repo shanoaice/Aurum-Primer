@@ -18,41 +18,7 @@ settings:
 
 rules:
   max-params: 0
-  "@typescript-eslint/naming-convention":
-    - error
-    - selector: default
-      format:
-        - strictCamelCase
-      leadingUnderscore: allow
-      trailingUnderscore: allow
-    - selector: import
-      format:
-        - camelCase
-        - StrictPascalCase
-    - selector: variable
-      format:
-        - camelCase
-        - UPPER_CASE
-      leadingUnderscore: allow
-      trailingUnderscore: allow
-    - selector: typeLike
-      format:
-        - StrictPascalCase
-    - selector:
-        - objectLiteralProperty
-        - typeProperty
-      format:
-        - snake_case
-        - strictCamelCase
-      leadingUnderscore: allow
-      trailingUnderscore: allow
-    - selector: function
-      format:
-        - strictCamelCase
-        - StrictPascalCase
-    - selector: enumMember
-      format:
-        - StrictPascalCase
+  "@typescript-eslint/naming-convention": 0
   unicorn/filename-case:
     - error
     - cases:
