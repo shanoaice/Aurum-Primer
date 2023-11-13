@@ -632,6 +632,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iconify-json/fluent@npm:^1.1.40":
+  version: 1.1.40
+  resolution: "@iconify-json/fluent@npm:1.1.40"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: d55efa2a22a114d8a65df04aeacce2806d43a27c2b850e6dd25e477dcb7a3f694ac79b4cc7947907abcde883880493ab3eabcf1dabd048822c236eb235ed1dc4
+  languageName: node
+  linkType: hard
+
+"@iconify/tailwind@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@iconify/tailwind@npm:0.1.3"
+  dependencies:
+    "@iconify/types": "npm:^2.0.0"
+  checksum: ddb3e722165bd83925ca7f03635a0a5a2fdeb5760a7fc5c77154f16ce48a1058827e54e5a83ce0e69c8290589a4338e2c9f0ead86f89e05844e47cd0e523e7c1
+  languageName: node
+  linkType: hard
+
+"@iconify/types@npm:*, @iconify/types@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@iconify/types@npm:2.0.0"
+  checksum: 65a3be43500c7ccacf360e136d00e1717f050b7b91da644e94370256ac66f582d59212bdb30d00788aab4fc078262e91c95b805d1808d654b72f6d2072a7e4b2
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -774,6 +799,15 @@ __metadata:
   peerDependencies:
     solid-js: ^1.6.12
   checksum: 791b6ea82f4f711d55a94d373b3b2edcc2c3a31851999472a83f56a32831fb4f04520b96ece22256a0f1b7293784cbc77788a530ea6816b2e8eeac1285e4e992
+  languageName: node
+  linkType: hard
+
+"@solidjs/router@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "@solidjs/router@npm:0.9.1"
+  peerDependencies:
+    solid-js: ^1.8.4
+  checksum: 052bc820bd027cd17acb9a5d55c5c6e0ecfd377b5316649c49e1ffac9e681132608bcd198363a597ad817aa7c29ddcfc396474739e319c881f596a1e5180e389
   languageName: node
   linkType: hard
 
@@ -1447,8 +1481,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aurum-primer@workspace:."
   dependencies:
+    "@iconify-json/fluent": "npm:^1.1.40"
+    "@iconify/tailwind": "npm:^0.1.3"
     "@nanostores/solid": "npm:^0.4.2"
     "@solid-primitives/websocket": "npm:^1.2.0"
+    "@solidjs/router": "npm:^0.9.1"
     "@tanstack/solid-table": "npm:^8.10.7"
     "@tanstack/solid-virtual": "npm:^3.0.0-beta.68"
     "@tauri-apps/api": "npm:^1.5.1"
