@@ -55,6 +55,7 @@ rules:
     - cases:
         kebabCase: true
         pascalCase: true
+  "@typescript-eslint/prefer-nullish-coalescing": 0
 parserOptions:
   project:
     - ./tsconfig.json
