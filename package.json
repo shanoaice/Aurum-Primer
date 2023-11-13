@@ -13,6 +13,7 @@
     "@iconify/tailwind": "^0.1.3",
     "@nanostores/solid": "^0.4.2",
     "@solid-primitives/websocket": "^1.2.0",
+    "@solidjs/router": "^0.9.1",
     "@tanstack/solid-table": "^8.10.7",
     "@tanstack/solid-virtual": "^3.0.0-beta.68",
     "@tauri-apps/api": "^1.5.1",
