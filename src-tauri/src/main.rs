@@ -4,6 +4,7 @@
 
 mod singbox_manager;
 mod random_cidr_generator;
+mod os_directories;
 
 fn main() {
     let initial_singbox_process = singbox_manager::SingBox::new();
@@ -17,7 +18,9 @@ fn main() {
             singbox_manager::reload_singbox_process,
             singbox_manager::stop_singbox_process,
 			random_cidr_generator::generate_random_ipv4_local_30,
-			random_cidr_generator::generate_random_ipv6_local_126
+			random_cidr_generator::generate_random_ipv6_local_126,
+			os_directories::get_data_dir,
+			os_directories::get_config_dir
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
