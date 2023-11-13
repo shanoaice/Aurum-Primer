@@ -23,6 +23,8 @@
     "nanostores": "^0.9.5",
     "solid-apexcharts": "^0.3.2",
     "solid-js": "^1.7.8",
+    "tauri-plugin-store-api": "https://github.com/tauri-apps/tauri-plugin-store#v1",
+    "theme-change": "^2.5.0",
     "yaml": "^2.3.4"
   },
   "devDependencies": {
