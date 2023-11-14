@@ -6,11 +6,11 @@ import Themes from '~/constants/Themes';
 import { setCurrentTheme } from '~/signals/theme';
 
 const Nav: ParentComponent<{ tooltip: string; href: string }> = (props) => (
-	<div class="tooltip tooltip-bottom group/nav-btn" data-tip={props.tooltip}>
-		<A class="rounded-box btn btn-ghost" href={props.href}>
+	<li class="tooltip tooltip-bottom group/nav-btn" data-tip={props.tooltip}>
+		<A class="rounded-box" href={props.href}>
 			{props.children}
 		</A>
-	</div>
+	</li>
 );
 
 const ThemeChanger = () => {
@@ -68,35 +68,42 @@ const Navbar = () => {
 			icon: (
 				<div class="icon-[fluent--home-24-regular] group-hover/nav-btn:icon-[fluent--home-24-filled] scale-150" />
 			),
-			name: 'dashboard',
+			name: 'Dashboard',
 			route: AppRoutes.Dashboard,
 		},
 		{
 			icon: (
 				<div class="icon-[fluent--earth-24-regular] group-hover/nav-btn:icon-[fluent--earth-24-filled] scale-150" />
 			),
-			name: 'proxies',
+			name: 'Proxies',
 			route: AppRoutes.Proxies,
 		},
 		{
 			icon: (
 				<div class="icon-[fluent--ruler-24-regular] group-hover/nav-btn:icon-[fluent--ruler-24-filled] scale-150" />
 			),
-			name: 'rules',
+			name: 'Rules',
 			route: AppRoutes.Rules,
 		},
 		{
 			icon: (
 				<div class="icon-[fluent--plug-connected-24-regular] group-hover/nav-btn:icon-[fluent--plug-connected-24-filled] scale-150" />
 			),
-			name: 'connections',
+			name: 'Connections',
 			route: AppRoutes.Connections,
+		},
+		{
+			icon: (
+				<div class="icon-[fluent--document-catch-up-24-regular] group-hover/nav-btn:icon-[fluent--document-catch-up-24-filled] scale-150" />
+			),
+			name: 'Logs',
+			route: AppRoutes.Logs,
 		},
 		{
 			icon: (
 				<div class="icon-[fluent--settings-24-regular] group-hover/nav-btn:icon-[fluent--settings-24-filled] scale-150" />
 			),
-			name: 'settings',
+			name: 'Settings',
 			route: AppRoutes.Settings,
 		},
 	];
@@ -106,14 +113,16 @@ const Navbar = () => {
 			<div class="navbar-start">
 				<LogoText />
 			</div>
-			<div class="navbar-center flex place-content-center">
-				<For each={navs()}>
-					{(nav) => (
-						<Nav href={nav.route} tooltip={nav.name}>
-							{nav.icon}
-						</Nav>
-					)}
-				</For>
+			<div class="navbar-center">
+				<ul class="menu menu-horizontal menu-lg gap-2">
+					<For each={navs()}>
+						{(nav) => (
+							<Nav href={nav.route} tooltip={nav.name}>
+								{nav.icon}
+							</Nav>
+						)}
+					</For>
+				</ul>
 			</div>
 			<div class="navbar-end flex justify-end">
 				<div>
