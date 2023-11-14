@@ -15,18 +15,16 @@ const routes = [
 
 function App() {
 	return (
-		<div data-theme={currentTheme()} class="w-full h-screen p-5">
+		<div
+			data-theme={currentTheme()}
+			class="w-full h-screen p-5 flex flex-col gap-3"
+		>
 			<Navbar />
 			<Routes>
 				<For each={routes}>
-					{(route) => (
-						<Route path={route.path} component={route.component} />
-					)}
+					{(route) => <Route path={route.path} component={route.component} />}
 				</For>
-				<Route
-					path="/"
-					element={<Navigate href={AppRoutes.Dashboard} />}
-				/>
+				<Route path="/" element={<Navigate href={AppRoutes.Dashboard} />} />
 			</Routes>
 		</div>
 	);
