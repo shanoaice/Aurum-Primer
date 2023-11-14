@@ -2,7 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 #![feature(ip_bits)]
 
-mod os_directories;
 mod random_cidr_generator;
 mod singbox_manager;
 
@@ -19,9 +18,7 @@ fn main() {
             singbox_manager::reload_singbox_process,
             singbox_manager::stop_singbox_process,
             random_cidr_generator::generate_random_ipv4_local_30,
-            random_cidr_generator::generate_random_ipv6_local_126,
-            os_directories::get_data_dir,
-            os_directories::get_config_dir
+            random_cidr_generator::generate_random_ipv6_local_126
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
