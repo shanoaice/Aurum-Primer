@@ -1,35 +1,37 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { For, lazy } from 'solid-js';
+import { Navigate, Route, Routes } from '@solidjs/router';
+import Navbar from '~/components/Navbar';
+import { AppRoutes } from '~/constants/Routes';
+import { currentTheme } from './signals/theme';
+
+import './App.css';
+
+const Dashboard = lazy(async () => import('./components/Dashboard'));
+
+const routes = [
+	{
+		path: AppRoutes.Dashboard,
+		component: Dashboard,
+	},
+];
 
 function App() {
-  const [count, setCount] = createSignal(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
-      <h1>Vite + Solid</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count()}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Solid logos to learn more
-      </p>
-    </>
-  )
+	return (
+		<div data-theme={currentTheme()}>
+			<Navbar />
+			<Routes>
+				<For each={routes}>
+					{(route) => (
+						<Route path={route.path} component={route.component} />
+					)}
+				</For>
+				<Route
+					path="/"
+					element={<Navigate href={AppRoutes.Dashboard} />}
+				/>
+			</Routes>
+		</div>
+	);
 }
 
-export default App
+export default App;
