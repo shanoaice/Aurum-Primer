@@ -1,13 +1,7 @@
 import { type Store as TauriStore } from 'tauri-plugin-store-api';
-import { type AsyncStorageWithOptions } from '@solid-primitives/storage';
+import { type AsyncStorage } from '@solid-primitives/storage';
 
-type TauriStorageOptions = {
-	path: string;
-};
-
-export const TauriStoreApi = (
-	tauriStore: TauriStore
-): AsyncStorageWithOptions<TauriStorageOptions> => ({
+export const createTauriStoreApi = (tauriStore: TauriStore): AsyncStorage => ({
 	getItem: async (key: string) => tauriStore.get(key),
 	getAll: async () => tauriStore.entries(),
 	setItem: async (key: string, value: string) => tauriStore.set(key, value),
@@ -17,5 +11,7 @@ export const TauriStoreApi = (
 	clear: async () => tauriStore.clear(),
 	// eslint-disable-next-line unicorn/no-await-expression-member
 	key: async (index: number) => (await tauriStore.keys())[index],
-	length: undefined,
+	get length() {
+		return tauriStore.length();
+	},
 });
