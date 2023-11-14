@@ -102,7 +102,7 @@ const Navbar = () => {
 	];
 
 	return (
-		<div class="navbar shadow rounded-md px-4 bg-base-200">
+		<div class="navbar px-4 bg-base-200">
 			<div class="navbar-start">
 				<LogoText />
 			</div>
