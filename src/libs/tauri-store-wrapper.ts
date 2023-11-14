@@ -4,10 +4,7 @@ import { type AsyncStorage } from '@solid-primitives/storage';
 export const createTauriStoreApi = (tauriStore: TauriStore): AsyncStorage => ({
 	getItem: async (key: string) => tauriStore.get(key),
 	getAll: async () => tauriStore.entries(),
-	async setItem(key: string, value: string) {
-		console.log(`set ${key} to ${value}`);
-		return tauriStore.set(key, value);
-	},
+	setItem: async (key: string, value: string) => tauriStore.set(key, value),
 	removeItem(key) {
 		void tauriStore.delete(key);
 	},
