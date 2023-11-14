@@ -1,10 +1,8 @@
 import { For, lazy } from 'solid-js';
 import { Navigate, Route, Routes } from '@solidjs/router';
 import Navbar from '~/components/Navbar';
-import { AppRoutes } from '~/constants/Routes';
+import AppRoutes from '~/constants/Routes';
 import { currentTheme } from './signals/theme';
-
-import './App.css';
 
 const Dashboard = lazy(async () => import('./components/Dashboard'));
 
@@ -17,7 +15,7 @@ const routes = [
 
 function App() {
 	return (
-		<div data-theme={currentTheme()}>
+		<div data-theme={currentTheme()} class="w-full h-screen p-5">
 			<Navbar />
 			<Routes>
 				<For each={routes}>
