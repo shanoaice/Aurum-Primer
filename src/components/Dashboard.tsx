@@ -4,7 +4,7 @@ function Dashboard() {
 	const [count, setCount] = createSignal(0);
 
 	return (
-		<div>
+		<div class="rounded-box shadow-md bg-base-300 p-5">
 			<h1>Vite + Solid</h1>
 			<div class="card">
 				<button onClick={() => setCount((count) => count + 1)}>
