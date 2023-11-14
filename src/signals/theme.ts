@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js';
 import { makePersisted } from '@solid-primitives/storage';
-import { asyncTauriStoreApi } from '~/store';
+import { asyncStoreApiTauri } from '~/store';
 import type Themes from '~/constants/Themes';
 
 export const [currentTheme, setCurrentTheme] = makePersisted(
 	// eslint-disable-next-line solid/reactivity
 	createSignal<(typeof Themes)[number]>('light'),
-	{ name: 'theme', storage: asyncTauriStoreApi }
+	{ name: 'theme', storage: asyncStoreApiTauri }
 );
