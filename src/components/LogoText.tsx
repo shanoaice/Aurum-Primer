@@ -1,5 +1,5 @@
 import { A } from '@solidjs/router';
-import { AppRoutes } from '../constants/Routes';
+import AppRoutes from '../constants/Routes';
 
 const LogoText = () => (
 	<A

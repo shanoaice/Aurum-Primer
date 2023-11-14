@@ -1,4 +1,4 @@
-export enum AppRoutes {
+enum AppRoutes {
 	Dashboard = '/dashboard',
 	Proxies = '/proxies',
 	Rules = '/rules',
@@ -6,3 +6,5 @@ export enum AppRoutes {
 	Logs = '/logs',
 	Settings = '/settings',
 }
+
+export default AppRoutes;

@@ -1,20 +1,10 @@
 import { createSignal } from 'solid-js';
-import solidLogo from '../assets/solid.svg';
 
 function Dashboard() {
 	const [count, setCount] = createSignal(0);
 
 	return (
-		<>
-			<div>
-				<a
-					href="https://solidjs.com"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img src={solidLogo} class="logo solid" alt="Solid logo" />
-				</a>
-			</div>
+		<div>
 			<h1>Vite + Solid</h1>
 			<div class="card">
 				<button onClick={() => setCount((count) => count + 1)}>
@@ -27,7 +17,7 @@ function Dashboard() {
 			<p class="read-the-docs">
 				Click on the Vite and Solid logos to learn more
 			</p>
-		</>
+		</div>
 	);
 }
 
