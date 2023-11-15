@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package daemon;
+option go_package = "github.com/sagernet/sing-box-daemon/daemon";
+
+message EmptyOptions {
+}
+
+message StringOptions {
+  string value = 1;
+}
+
+message BoolOptions {
+  bool value = 1;
+}
+
+message EmptyResult {
+}
+
+message SetupOptions {
+  string workingDirectory = 1;
+  string tempDirectory = 2;
+}
+
+message Version {
+  string version = 1;
+}
+
+message MemoryLimitOptions {
+  bool enabled = 1;
+  uint64 limit = 2;
+}
+
+
+message ServiceStatus {
+  enum Type {
+    IDLE = 0;
+    STARTING = 1;
+    STARTED = 2;
+    STOPPING = 3;
+  }
+  Type status = 1;
+}
+
+message Log {
+  enum Event {
+    MESSAGE = 0;
+    RESET = 1;
+  }
+  Event event = 1;
+  string message = 2;
+}
+
+message Status {
+  uint64 memory = 1;
+  uint64 memoryInuse = 2;
+  int32 goroutines = 3;
+  int32 connectionsIn = 4;
+  int32 connectionsOut = 5;
+  bool trafficAvailable = 6;
+  int64 uplink = 7;
+  int64 downlink = 8;
+  int64 uplinkTotal = 9;
+  int64 downlinkTotal = 10;
+}
+
+message Groups {
+  repeated Group group = 1;
+}
+
+message Group {
+  string tag = 1;
+  string type = 2;
+  bool selectable = 3;
+  string selected = 4;
+  bool isExpand = 5;
+  repeated GroupItem items = 6;
+}
+
+message GroupItem {
+  string tag = 1;
+  string type = 2;
+  int64 urlTestTime = 3;
+  int32 urlTestDelay = 4;
+}
+
+message SelectOutboundOptions {
+  string groupTag = 1;
+  string outboundTag = 2;
+}
+
+message GroupExpandOptions {
+  string groupTag = 1;
+  bool isExpand = 2;
+}
+
+message ClashMode {
+  string newMode = 3;
+}
+
+message ClashModeStatus {
+  repeated string modeList = 1;
+  string currentMode = 2;
+}
+
+message SystemProxyStatus {
+  bool available = 1;
+  bool enabled = 2;
+}
+
+service Daemon {
+
+  rpc Setup(SetupOptions) returns(EmptyResult) {}
+  rpc GetVersion(EmptyOptions) returns (Version) {}
+  rpc SetMemoryLimit(MemoryLimitOptions) returns(EmptyResult) {}
+  rpc CheckConfig(StringOptions) returns (EmptyResult) {}
+
+  rpc StartService(StringOptions) returns(EmptyResult) {}
+  rpc StopService(EmptyOptions) returns(EmptyResult) {}
+
+  rpc DeviceSleep(EmptyOptions) returns(EmptyResult) {}
+  rpc DeviceWake(EmptyOptions) returns(EmptyResult) {}
+
+  rpc SubscribeServiceStatus(EmptyOptions) returns(stream ServiceStatus) {}
+  rpc SubscribeLog(EmptyOptions) returns(stream Log) {}
+  rpc SubscribeStatus(EmptyOptions) returns(stream Status) {}
+  rpc SubscribeGroups(EmptyResult) returns(stream Groups) {}
+
+  rpc URLTest(StringOptions) returns(EmptyResult) {}
+  rpc SelectOutbound(SelectOutboundOptions) returns (EmptyResult) {}
+  rpc SetGroupExpand(GroupExpandOptions) returns (EmptyResult) {}
+
+  rpc GetClashModeStatus(EmptyOptions) returns(ClashModeStatus) {}
+  rpc SubscribeClashMode(EmptyOptions) returns(stream ClashMode) {}
+  rpc SetClashMode(StringOptions) returns(EmptyResult) {}
+
+  rpc GetSystemProxyStatus(EmptyOptions) returns(SystemProxyStatus) {}
+  rpc SetSystemProxyEnabled(BoolOptions) returns(EmptyResult) {}
+
+}
