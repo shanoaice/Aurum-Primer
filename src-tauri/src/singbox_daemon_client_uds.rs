@@ -11,21 +11,7 @@ use tower::service_fn;
 
 use self::singbox_daemon::daemon_client::DaemonClient;
 
-#[allow(dead_code)]
-enum WebpageEvents {
-    // configPath
-    Start(String),
-    Stop(),
-    // selectorTag, outboundTag
-    SelectOutbound(String, String),
-    // clashMode
-    SetClashMode(String),
-    SetSystemProxyEnabled(bool),
-    // outboundTag
-    UrlTest(String),
-}
-
-#[allow(dead_code, unused_variables)]
+#[allow(dead_code, unused_variables, unused_mut)]
 async fn singbox_daemon_client_main(
     webpage_msg_reciever: AsyncReceiver<WebpageEvents>,
     tauri_app_handle: tauri::AppHandle,
