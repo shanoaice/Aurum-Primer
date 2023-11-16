@@ -27,10 +27,13 @@ fn main() {
                 9090,
             ));
 
-						app.listen_global("webpage_command", move |event| {
-							let command = event.payload().unwrap();
-							sender.as_sync().send(serde_json::from_str(command).unwrap()).unwrap();
-						});
+            app.listen_global("webpage_command", move |event| {
+                let command = event.payload().unwrap();
+                sender
+                    .as_sync()
+                    .send(serde_json::from_str(command).unwrap())
+                    .unwrap();
+            });
 
             Ok(())
         })
