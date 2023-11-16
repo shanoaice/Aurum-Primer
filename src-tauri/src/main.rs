@@ -2,8 +2,10 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 #![feature(ip_bits)]
 
+mod compio_unix_stream_wrapper;
 mod random_cidr_generator;
 mod singbox_manager;
+mod singbox_daemon_client_uds;
 
 fn main() {
     let initial_singbox_process = singbox_manager::SingBox::new();
