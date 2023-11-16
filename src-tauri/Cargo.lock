@@ -82,6 +82,8 @@ dependencies = [
  "http",
  "hyper",
  "kanal",
+ "num-derive",
+ "num-traits",
  "prost",
  "rand 0.8.5",
  "rustix",
@@ -2069,6 +2071,17 @@ checksum = "77a8165726e8236064dbb45459242600304b42a5ea24ee2948e18e023bf7ba84"
 dependencies = [
  "overload",
  "winapi",
+]
+
+[[package]]
+name = "num-derive"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cfb77679af88f8b125209d354a202862602672222e7f2313fdd6dc349bad4712"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.39",
 ]
 
 [[package]]
