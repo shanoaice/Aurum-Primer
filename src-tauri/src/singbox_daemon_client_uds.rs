@@ -9,6 +9,8 @@ use send_wrapper::SendWrapper;
 use tonic::transport::Endpoint;
 use tower::service_fn;
 
+use self::singbox_daemon::daemon_client::DaemonClient;
+
 #[allow(dead_code)]
 enum WebpageEvents {
     // configPath
@@ -36,7 +38,9 @@ async fn singbox_daemon_client_main(
     let channel =
         endpoint_with_compio.connect_with_connector(service_fn(move |_: tonic::transport::Uri| {
             SendWrapper::new(UnixStream::connect(socket_path.clone()))
-        }));
+        })).await?;
+
+		let mut client = DaemonClient::new(channel);
 
     Ok(())
 }
