@@ -3,23 +3,21 @@ syntax = "proto3";
 package daemon;
 option go_package = "github.com/sagernet/sing-box-daemon/daemon";
 
-message EmptyOptions {
-}
+import "google/protobuf/empty.proto";
 
-message StringOptions {
+message String {
   string value = 1;
 }
 
-message BoolOptions {
+message Bool {
   bool value = 1;
-}
-
-message EmptyResult {
 }
 
 message SetupOptions {
   string workingDirectory = 1;
   string tempDirectory = 2;
+  bool disableColors = 3;
+  int32 logMaxLines = 4;
 }
 
 message Version {
@@ -30,7 +28,6 @@ message MemoryLimitOptions {
   bool enabled = 1;
   uint64 limit = 2;
 }
-
 
 message ServiceStatus {
   enum Type {
@@ -43,12 +40,29 @@ message ServiceStatus {
 }
 
 message Log {
-  enum Event {
-    MESSAGE = 0;
-    RESET = 1;
+  oneof event {
+    LogMessage message = 1;
+    ResetMessage reset = 2;
   }
-  Event event = 1;
-  string message = 2;
+
+  enum Level {
+    PANIC = 0;
+    FATAL = 1;
+    ERROR = 2;
+    WARN = 3;
+    INFO = 4;
+    DEBUG = 5;
+    TRACE = 6;
+  }
+
+  message LogMessage {
+    Level level = 1;
+    string message = 2;
+  }
+
+  message ResetMessage {
+    repeated LogMessage messages = 1;
+  }
 }
 
 message Status {
@@ -110,31 +124,31 @@ message SystemProxyStatus {
 
 service Daemon {
 
-  rpc Setup(SetupOptions) returns(EmptyResult) {}
-  rpc GetVersion(EmptyOptions) returns (Version) {}
-  rpc SetMemoryLimit(MemoryLimitOptions) returns(EmptyResult) {}
-  rpc CheckConfig(StringOptions) returns (EmptyResult) {}
+  rpc Setup(SetupOptions) returns(google.protobuf.Empty) {}
+  rpc GetVersion(google.protobuf.Empty) returns (Version) {}
+  rpc SetMemoryLimit(MemoryLimitOptions) returns(google.protobuf.Empty) {}
+  rpc CheckConfig(String) returns (google.protobuf.Empty) {}
 
-  rpc StartService(StringOptions) returns(EmptyResult) {}
-  rpc StopService(EmptyOptions) returns(EmptyResult) {}
+  rpc StartService(String) returns(google.protobuf.Empty) {}
+  rpc StopService(google.protobuf.Empty) returns(google.protobuf.Empty) {}
 
-  rpc DeviceSleep(EmptyOptions) returns(EmptyResult) {}
-  rpc DeviceWake(EmptyOptions) returns(EmptyResult) {}
+  rpc DeviceSleep(google.protobuf.Empty) returns(google.protobuf.Empty) {}
+  rpc DeviceWake(google.protobuf.Empty) returns(google.protobuf.Empty) {}
 
-  rpc SubscribeServiceStatus(EmptyOptions) returns(stream ServiceStatus) {}
-  rpc SubscribeLog(EmptyOptions) returns(stream Log) {}
-  rpc SubscribeStatus(EmptyOptions) returns(stream Status) {}
-  rpc SubscribeGroups(EmptyResult) returns(stream Groups) {}
+  rpc SubscribeServiceStatus(google.protobuf.Empty) returns(stream ServiceStatus) {}
+  rpc SubscribeLog(google.protobuf.Empty) returns(stream Log) {}
+  rpc SubscribeStatus(google.protobuf.Empty) returns(stream Status) {}
+  rpc SubscribeGroups(google.protobuf.Empty) returns(stream Groups) {}
 
-  rpc URLTest(StringOptions) returns(EmptyResult) {}
-  rpc SelectOutbound(SelectOutboundOptions) returns (EmptyResult) {}
-  rpc SetGroupExpand(GroupExpandOptions) returns (EmptyResult) {}
+  rpc URLTest(String) returns(google.protobuf.Empty) {}
+  rpc SelectOutbound(SelectOutboundOptions) returns (google.protobuf.Empty) {}
+  rpc SetGroupExpand(GroupExpandOptions) returns (google.protobuf.Empty) {}
 
-  rpc GetClashModeStatus(EmptyOptions) returns(ClashModeStatus) {}
-  rpc SubscribeClashMode(EmptyOptions) returns(stream ClashMode) {}
-  rpc SetClashMode(StringOptions) returns(EmptyResult) {}
+  rpc GetClashModeStatus(google.protobuf.Empty) returns(ClashModeStatus) {}
+  rpc SubscribeClashMode(google.protobuf.Empty) returns(stream ClashMode) {}
+  rpc SetClashMode(String) returns(google.protobuf.Empty) {}
 
-  rpc GetSystemProxyStatus(EmptyOptions) returns(SystemProxyStatus) {}
-  rpc SetSystemProxyEnabled(BoolOptions) returns(EmptyResult) {}
+  rpc GetSystemProxyStatus(google.protobuf.Empty) returns(SystemProxyStatus) {}
+  rpc SetSystemProxyEnabled(Bool) returns(google.protobuf.Empty) {}
 
 }
