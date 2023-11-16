@@ -9,6 +9,8 @@ use send_wrapper::SendWrapper;
 use tonic::transport::Endpoint;
 use tower::service_fn;
 
+use crate::singbox_daemon_client::WebpageEvents;
+
 use self::singbox_daemon::daemon_client::DaemonClient;
 
 #[allow(dead_code, unused_variables, unused_mut)]
