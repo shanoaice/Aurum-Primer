@@ -7,16 +7,13 @@ use std::sync::Mutex;
 
 use hyper::{Client, Uri};
 use kanal::{AsyncReceiver, Sender};
-use num_derive::FromPrimitive;
-use num_traits::FromPrimitive;
 use serde::{Serialize, Deserialize};
 use singbox_daemon::daemon_client::DaemonClient;
 use tauri::Manager;
 use tonic::{Request, Streaming};
 
 use self::h2c::H2cChannel;
-use self::singbox_daemon::log::LogMessage;
-use self::singbox_daemon::{log::Event, Log};
+use self::singbox_daemon::Log;
 
 #[derive(Serialize, Deserialize, Clone)]
 #[serde(tag = "tag", content = "data")]
@@ -37,40 +34,6 @@ pub struct WebpageEventSenderState {
     sender: Mutex<Sender<WebpageEvents>>,
 }
 
-#[derive(Clone, Serialize, FromPrimitive)]
-#[repr(i32)]
-pub enum LogLevel {
-    Panic = 0,
-    Fatal = 1,
-    Error = 2,
-    Warn = 3,
-    Info = 4,
-    Debug = 5,
-    Trace = 6,
-}
-
-#[derive(Clone, Serialize)]
-pub struct LogMessageEntry {
-    level: LogLevel,
-    message: String,
-}
-
-impl LogMessageEntry {
-    pub fn from_log_message(log_message: &LogMessage) -> LogMessageEntry {
-        LogMessageEntry {
-            level: LogLevel::from_i32(log_message.level).unwrap(),
-            message: log_message.message.clone(),
-        }
-    }
-}
-
-#[derive(Serialize, Clone)]
-#[serde(tag = "tag", content = "data")]
-pub enum LogMessageTypes {
-    Log(LogMessageEntry),
-    Reset(Vec<LogMessageEntry>),
-}
-
 pub async fn subscribe_log(
     mut stream: Streaming<Log>,
     tauri_app_handle: tauri::AppHandle,
@@ -79,26 +42,10 @@ pub async fn subscribe_log(
         let Some(log) = stream.message().await? else {
             continue;
         };
-        match log.event.unwrap() {
-            Event::Message(log_message) => {
-                tauri_app_handle.emit_all(
-                    "log",
-                    LogMessageTypes::Log(LogMessageEntry::from_log_message(&log_message)),
-                )?;
-            }
-            Event::Reset(reset_message) => {
-                tauri_app_handle.emit_all(
-                    "log",
-                    LogMessageTypes::Reset(
-                        reset_message
-                            .messages
-                            .iter()
-                            .map(LogMessageEntry::from_log_message)
-                            .collect(),
-                    ),
-                )?;
-            }
-        }
+        let Some(event) = log.event else {
+					continue;
+				};
+				tauri_app_handle.emit_all("log", event)?;
     }
 }
 
