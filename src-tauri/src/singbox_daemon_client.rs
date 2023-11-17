@@ -7,13 +7,13 @@ use std::sync::Mutex;
 
 use hyper::{Client, Uri};
 use kanal::{AsyncReceiver, Sender};
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use singbox_daemon::daemon_client::DaemonClient;
 use tauri::Manager;
 use tonic::{Request, Streaming};
 
 use self::h2c::H2cChannel;
-use self::singbox_daemon::Log;
+use self::singbox_daemon::{Log, Status};
 
 #[derive(Serialize, Deserialize, Clone)]
 #[serde(tag = "tag", content = "data")]
@@ -43,9 +43,21 @@ pub async fn subscribe_log(
             continue;
         };
         let Some(event) = log.event else {
-					continue;
-				};
-				tauri_app_handle.emit_all("log", event)?;
+            continue;
+        };
+        tauri_app_handle.emit_all("log", event)?;
+    }
+}
+
+pub async fn subscribe_status(
+    mut stream: Streaming<Status>,
+    tauri_app_handle: tauri::AppHandle,
+) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    loop {
+        let Some(status) = stream.message().await? else {
+            continue;
+        };
+        tauri_app_handle.emit_all("status", status)?;
     }
 }
 
@@ -110,8 +122,13 @@ pub async fn singbox_daemon_client_main(
     let mut client = DaemonClient::with_origin(h2c_client, origin);
 
     let log_stream = client.subscribe_log(Request::new(())).await?.into_inner();
+    let status_stream = client
+        .subscribe_status(Request::new(()))
+        .await?
+        .into_inner();
 
     tokio::spawn(subscribe_log(log_stream, tauri_app_handle.clone()));
+    tokio::spawn(subscribe_status(status_stream, tauri_app_handle.clone()));
     tokio::spawn(webpage_msg_handler(
         webpage_msg_reciever.clone(),
         client.clone(),
