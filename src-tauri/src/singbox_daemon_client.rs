@@ -110,6 +110,7 @@ pub async fn webpage_msg_handler(
 pub async fn singbox_daemon_client_main(
     webpage_msg_reciever: AsyncReceiver<WebpageEvents>,
     tauri_app_handle: tauri::AppHandle,
+    main_joinset_sender: AsyncSender<tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>>,
     daemon_port: u16,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let origin_path = format!("http://[::1]:{}", daemon_port);
@@ -127,12 +128,16 @@ pub async fn singbox_daemon_client_main(
         .await?
         .into_inner();
 
-    tokio::spawn(subscribe_log(log_stream, tauri_app_handle.clone()));
-    tokio::spawn(subscribe_status(status_stream, tauri_app_handle.clone()));
-    tokio::spawn(webpage_msg_handler(
+    let mut main_joinset =
+        tokio::task::JoinSet::<Result<(), Box<dyn std::error::Error + Send + Sync>>>::new();
+    main_joinset.spawn(subscribe_log(log_stream, tauri_app_handle.clone()));
+    main_joinset.spawn(subscribe_status(status_stream, tauri_app_handle.clone()));
+    main_joinset.spawn(webpage_msg_handler(
         webpage_msg_reciever.clone(),
         client.clone(),
     ));
+
+    main_joinset_sender.send(main_joinset).await?;
 
     Ok(())
 }
