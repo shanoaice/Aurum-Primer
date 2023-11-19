@@ -3,10 +3,9 @@ pub mod singbox_daemon {
 }
 
 use std::str::FromStr;
-use std::sync::Mutex;
 
 use hyper::{Client, Uri};
-use kanal::{AsyncReceiver, Sender};
+use kanal::{AsyncReceiver, AsyncSender};
 use serde::{Deserialize, Serialize};
 use singbox_daemon::daemon_client::DaemonClient;
 use tauri::Manager;
@@ -28,10 +27,6 @@ pub enum WebpageEvents {
     SetSystemProxyEnabled(bool),
     // outboundTag
     UrlTest(String),
-}
-
-pub struct WebpageEventSenderState {
-    sender: Mutex<Sender<WebpageEvents>>,
 }
 
 pub async fn subscribe_log(
