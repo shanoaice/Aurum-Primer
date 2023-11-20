@@ -2,7 +2,6 @@ use std::mem::ManuallyDrop;
 use std::process::{Child, Command};
 use std::sync::Mutex;
 
-use windows::core::{w, HSTRING, PCWSTR};
 use windows::Win32::Foundation::HANDLE;
 
 pub union SingBoxProcess {
@@ -51,6 +50,7 @@ impl SingBox {
     // see https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shellexecuteexw
     #[cfg(target_os = "windows")]
     pub fn start_process(&self) -> Result<(), String> {
+        use windows::core::{w, HSTRING, PCWSTR};
         use windows::Win32::UI::{
             Shell::{
                 ShellExecuteExW, SEE_MASK_NOCLOSEPROCESS, SEE_MASK_NO_CONSOLE, SHELLEXECUTEINFOW,
