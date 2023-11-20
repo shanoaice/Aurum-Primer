@@ -6,7 +6,7 @@ use windows::Win32::Foundation::HANDLE;
 
 pub union SingBoxProcess {
     windows: HANDLE,
-    unix: ManuallyDrop<Child>,
+    linux: ManuallyDrop<Child>,
 }
 
 pub struct SingBox {
@@ -97,7 +97,13 @@ impl SingBox {
     // on Linux, this is not needed (neither sudo)
     // we just need to tell the user to add CAP_NETADMIN
     // to the sing-box-daemon executable
-    #[cfg(target_os = "linux")]
+		// on macOS, we don't have capabilities(7)
+		// thus we need to use sudo to launch sing-box-daemon
+		// I have no idea how launchd works
+		// neither do I have a macOS device to test it out
+		// if somebody has relevant knowledge, contribution is welcomed
+		// TODO: Unix impl of start_process
+    #[cfg(not(target_os = "windows"))]
     pub fn start_process(&self) -> Result<(), String> {
         Ok(())
     }
