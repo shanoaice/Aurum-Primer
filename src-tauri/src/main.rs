@@ -33,7 +33,6 @@ async fn async_error_handler(
 }
 
 fn main() {
-
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
         .setup(|app| {
@@ -50,13 +49,13 @@ fn main() {
                 tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>,
             >(1);
 
-            app.listen_global("daemon_start", move |_| {
+            app.listen_global("daemon_start", move |event| {
                 let abort_handle_sender_clone = main_abort_handle_sender.clone();
                 let main_join_handle = tokio::spawn(singbox_daemon_client_main(
                     receiver.clone(),
                     app_handle_for_main.clone(),
                     main_joinset_sender.clone().to_async(),
-                    9090,
+                    serde_json::from_str::<u16>(event.payload().unwrap()).unwrap(),
                 ));
                 abort_handle_sender_clone
                     .send(main_join_handle.abort_handle())
@@ -83,6 +82,9 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             random_cidr_generator::generate_random_ipv4_local_30,
+            random_cidr_generator::generate_random_ipv6_local_126,
+            singbox_daemon_manager::start_singbox_daemon,
+            singbox_daemon_manager::stop_singbox_daemon,
             singbox_daemon_manager::set_singbox_daemon_params
         ])
         .run(tauri::generate_context!())
