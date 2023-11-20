@@ -83,7 +83,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             random_cidr_generator::generate_random_ipv4_local_30,
-            random_cidr_generator::generate_random_ipv6_local_126
+            singbox_daemon_manager::set_singbox_daemon_params
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

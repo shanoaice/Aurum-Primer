@@ -6,7 +6,7 @@ use windows::Win32::Foundation::HANDLE;
 
 pub union SingBoxProcess {
     windows: HANDLE,
-    linux: ManuallyDrop<Child>,
+    unix: ManuallyDrop<Child>,
 }
 
 pub struct SingBox {
@@ -97,12 +97,12 @@ impl SingBox {
     // on Linux, this is not needed (neither sudo)
     // we just need to tell the user to add CAP_NETADMIN
     // to the sing-box-daemon executable
-		// on macOS, we don't have capabilities(7)
-		// thus we need to use sudo to launch sing-box-daemon
-		// I have no idea how launchd works
-		// neither do I have a macOS device to test it out
-		// if somebody has relevant knowledge, contribution is welcomed
-		// TODO: Unix impl of start_process
+    // on macOS, we don't have capabilities(7)
+    // thus we need to use sudo to launch sing-box-daemon
+    // I have no idea how launchd works
+    // neither do I have a macOS device to test it out
+    // if somebody has relevant knowledge, contribution is welcomed
+    // TODO: Unix impl of start_process
     #[cfg(not(target_os = "windows"))]
     pub fn start_process(&self) -> Result<(), String> {
         Ok(())
@@ -112,4 +112,23 @@ impl SingBox {
         *self.listen_port.lock().unwrap() = Some(listen_port);
         *self.daemon_path.lock().unwrap() = Some(daemon_path);
     }
+}
+
+#[tauri::command]
+pub fn start_singbox_daemon(state: tauri::State<SingBox>) -> Result<(), String> {
+    state.start_process()
+}
+
+#[tauri::command]
+pub fn stop_singbox_daemon(state: tauri::State<SingBox>) -> Result<(), String> {
+    state.kill_process()
+}
+
+#[tauri::command]
+pub fn set_singbox_daemon_params(
+    listen_port: u16,
+    daemon_path: String,
+    state: tauri::State<SingBox>,
+) {
+    state.set_parameters(listen_port, daemon_path);
 }
