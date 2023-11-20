@@ -106,6 +106,7 @@ pub async fn singbox_daemon_client_main(
     webpage_msg_reciever: AsyncReceiver<WebpageEvents>,
     tauri_app_handle: tauri::AppHandle,
     main_joinset_sender: AsyncSender<tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>>,
+		task_abort_handle_sender: AsyncSender<Vec<tokio::task::AbortHandle>>,
     daemon_port: u16,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let origin_path = format!("http://[::1]:{}", daemon_port);
@@ -125,14 +126,16 @@ pub async fn singbox_daemon_client_main(
 
     let mut main_joinset =
         tokio::task::JoinSet::<Result<(), Box<dyn std::error::Error + Send + Sync>>>::new();
-    main_joinset.spawn(subscribe_log(log_stream, tauri_app_handle.clone()));
-    main_joinset.spawn(subscribe_status(status_stream, tauri_app_handle.clone()));
-    main_joinset.spawn(webpage_msg_handler(
+		let mut task_abort_handles = Vec::<tokio::task::AbortHandle>::new();
+    task_abort_handles.push(main_joinset.spawn(subscribe_log(log_stream, tauri_app_handle.clone())));
+    task_abort_handles.push(main_joinset.spawn(subscribe_status(status_stream, tauri_app_handle.clone())));
+    task_abort_handles.push(main_joinset.spawn(webpage_msg_handler(
         webpage_msg_reciever.clone(),
         client.clone(),
-    ));
+    )));
 
     main_joinset_sender.send(main_joinset).await?;
+		task_abort_handle_sender.send(task_abort_handles).await?;
 
     Ok(())
 }
