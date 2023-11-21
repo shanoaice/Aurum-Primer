@@ -37,9 +37,11 @@ async fn async_error_handler(
 async fn joinset_error_handler(
     app_handle: AppHandle,
     error_event: &str,
-    joinset_recv: kanal::AsyncReceiver<tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>>,
+    joinset_recv: kanal::AsyncReceiver<
+        tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>,
+    >,
 ) -> Result<(), tauri::Error> {
-		let mut main_joinset = joinset_recv.recv().await.unwrap();
+    let mut main_joinset = joinset_recv.recv().await.unwrap();
     while let Some(result) = main_joinset.join_next().await {
         match result {
             Err(e) => {
@@ -65,7 +67,7 @@ async fn joinset_error_handler(
 async fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
-				.manage(SingBox::new())
+        .manage(SingBox::new())
         .setup(|app| {
             let app_handle = app.handle();
             let app_handle_for_main = app_handle.clone();
@@ -79,9 +81,8 @@ async fn main() {
             let (main_joinset_sender, main_joinset_reciever) = kanal::bounded_async::<
                 tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>,
             >(1);
-            let (task_abort_handle_sender, task_abort_handle_reciever) = kanal::bounded::<
-                Vec<tokio::task::AbortHandle>,
-            >(1);
+            let (task_abort_handle_sender, task_abort_handle_reciever) =
+                kanal::bounded::<Vec<tokio::task::AbortHandle>>(1);
 
             app.listen_global("daemon_start", move |event| {
                 let abort_handle_sender_clone = main_abort_handle_sender.clone();
@@ -89,7 +90,7 @@ async fn main() {
                     receiver.clone(),
                     app_handle_for_main.clone(),
                     main_joinset_sender.clone(),
-										task_abort_handle_sender.clone().to_async(),
+                    task_abort_handle_sender.clone().to_async(),
                     serde_json::from_str::<u16>(event.payload().unwrap()).unwrap(),
                 ));
                 abort_handle_sender_clone
@@ -110,10 +111,10 @@ async fn main() {
 
             app.listen_global("daemon_stop", move |_| {
                 main_abort_handle_reciever.recv().unwrap().abort();
-								let task_handles = task_abort_handle_reciever.recv().unwrap();
-								for handle in task_handles {
-									handle.abort();
-								}
+                let task_handles = task_abort_handle_reciever.recv().unwrap();
+                for handle in task_handles {
+                    handle.abort();
+                }
             });
 
             app.listen_global("webpage_command", move |event| {
