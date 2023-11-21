@@ -18,24 +18,20 @@ type DaemonStatus = {
 function Dashboard() {
 	const [daemonStatus, setDaemonStatus] = createSignal<DaemonStatus>();
 
-	let unsubscribeDaemonStatus: UnlistenFn | undefined;
-
-	event
+	const unsubscribeDaemonStatusPromise = event
 		.listen<DaemonStatus>('status', (event) => {
 			setDaemonStatus(event.payload);
 		})
-		.then(
-			(unlisten) => {
-				unsubscribeDaemonStatus = unlisten;
-			},
-			(error) => {
-				void error;
-			}
-		);
+		.catch((error) => {
+			void error;
+		});
 
 	onCleanup(() => {
-		if (!unsubscribeDaemonStatus) return;
-		unsubscribeDaemonStatus();
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		unsubscribeDaemonStatusPromise.then((unlisten) => {
+			if (!unlisten) return;
+			unlisten();
+		});
 	});
 
 	return (
