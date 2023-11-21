@@ -3,6 +3,7 @@
 #![feature(ip_bits)]
 
 use singbox_daemon_client::{singbox_daemon_client_main, WebpageEvents};
+use singbox_daemon_manager::SingBox;
 use tauri::{AppHandle, Manager};
 
 mod compio_unix_stream_wrapper;
@@ -36,9 +37,10 @@ async fn async_error_handler(
 async fn joinset_error_handler(
     app_handle: AppHandle,
     error_event: &str,
-    mut tokio_joinset: tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>,
+    joinset_recv: kanal::AsyncReceiver<tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>>,
 ) -> Result<(), tauri::Error> {
-    while let Some(result) = tokio_joinset.join_next().await {
+		let mut main_joinset = joinset_recv.recv().await.unwrap();
+    while let Some(result) = main_joinset.join_next().await {
         match result {
             Err(e) => {
                 if e.is_cancelled() {
@@ -59,9 +61,11 @@ async fn joinset_error_handler(
     Ok(())
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
+				.manage(SingBox::new())
         .setup(|app| {
             let app_handle = app.handle();
             let app_handle_for_main = app_handle.clone();
@@ -72,7 +76,7 @@ fn main() {
 
             let (main_abort_handle_sender, main_abort_handle_reciever) =
                 kanal::bounded::<tokio::task::AbortHandle>(1);
-            let (main_joinset_sender, main_joinset_reciever) = kanal::bounded::<
+            let (main_joinset_sender, main_joinset_reciever) = kanal::bounded_async::<
                 tokio::task::JoinSet<Result<(), Box<dyn std::error::Error + Send + Sync>>>,
             >(1);
             let (task_abort_handle_sender, task_abort_handle_reciever) = kanal::bounded::<
@@ -84,7 +88,7 @@ fn main() {
                 let main_join_handle = tokio::spawn(singbox_daemon_client_main(
                     receiver.clone(),
                     app_handle_for_main.clone(),
-                    main_joinset_sender.clone().to_async(),
+                    main_joinset_sender.clone(),
 										task_abort_handle_sender.clone().to_async(),
                     serde_json::from_str::<u16>(event.payload().unwrap()).unwrap(),
                 ));
@@ -98,12 +102,10 @@ fn main() {
                 ));
             });
 
-            let main_joinset = main_joinset_reciever.recv().unwrap();
-
             tokio::spawn(joinset_error_handler(
                 app.handle(),
                 "daemon_client_stream_error",
-                main_joinset,
+                main_joinset_reciever,
             ));
 
             app.listen_global("daemon_stop", move |_| {
