@@ -6,6 +6,7 @@ enum AppRoutes {
 	Logs = '/logs',
 	Settings = '/settings',
 	Profiles = '/profiles',
+	Setup = '/',
 }
 
 export default AppRoutes;

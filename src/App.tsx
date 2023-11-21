@@ -5,11 +5,18 @@ import AppRoutes from '~/constants/Routes';
 import { currentTheme, daemonConfig } from '~/signals/persisted';
 
 const Dashboard = lazy(async () => import('~/pages/Dashboard'));
+const Setup = lazy(async () => import('~/pages/Setup'));
 
 const routes = [
 	{
 		path: AppRoutes.Dashboard,
 		component: Dashboard,
+	},
+	{
+		path: AppRoutes.Setup,
+		component: daemonConfig()
+			? () => <Navigate href={AppRoutes.Dashboard} />
+			: Setup,
 	},
 ];
 
@@ -22,7 +29,6 @@ function App() {
 					<For each={routes}>
 						{(route) => <Route path={route.path} component={route.component} />}
 					</For>
-					<Route path="/" element={<Navigate href={AppRoutes.Dashboard} />} />
 				</Routes>
 			</div>
 		</div>
