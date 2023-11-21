@@ -29,7 +29,7 @@ async fn async_error_handler(
                 app_handle.emit_all(error_event, format!("{}", e))
             }
         }
-        Ok(Err(e)) => app_handle.emit_all("error", format!("{}", e)),
+        Ok(Err(e)) => app_handle.emit_all(error_event, format!("{}", e)),
         _ => Ok(()),
     }
 }
@@ -50,7 +50,7 @@ async fn joinset_error_handler(
                 }
             }
             Ok(Err(e)) => {
-                app_handle.emit_all("error", format!("{}", e))?;
+                app_handle.emit_all(error_event, format!("{}", e))?;
             }
             _ => {
                 continue;
