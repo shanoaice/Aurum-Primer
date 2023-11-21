@@ -8,3 +8,15 @@ export const [currentTheme, setCurrentTheme] = makePersisted(
 	createSignal<(typeof Themes)[number]>('light'),
 	{ name: 'theme', storage: asyncStoreApiTauri }
 );
+
+type DaemonConfig = {
+	daemonPath: string;
+	listenPort: number;
+	runOnStart: boolean;
+};
+
+export const [daemonConfig, setDaemonConfig] = makePersisted(
+	// eslint-disable-next-line solid/reactivity
+	createSignal<DaemonConfig | undefined>(),
+	{ name: 'daemon_config', storage: asyncStoreApiTauri }
+);

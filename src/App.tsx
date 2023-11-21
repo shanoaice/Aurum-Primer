@@ -2,7 +2,7 @@ import { For, lazy } from 'solid-js';
 import { Navigate, Route, Routes } from '@solidjs/router';
 import Navbar from '~/components/Navbar';
 import AppRoutes from '~/constants/Routes';
-import { currentTheme } from '~/signals/theme';
+import { currentTheme, daemonConfig } from '~/signals/persisted';
 
 const Dashboard = lazy(async () => import('~/pages/Dashboard'));
 

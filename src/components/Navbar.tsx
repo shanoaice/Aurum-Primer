@@ -3,7 +3,7 @@ import AppRoutes from '../constants/Routes';
 import { A } from '@solidjs/router';
 import LogoText from './LogoText';
 import Themes from '~/constants/Themes';
-import { setCurrentTheme } from '~/signals/theme';
+import { setCurrentTheme } from '~/signals/persisted';
 
 const Nav: ParentComponent<{ tooltip: string; href: string }> = (props) => (
 	<li class="tooltip tooltip-bottom group/nav-btn" data-tip={props.tooltip}>
