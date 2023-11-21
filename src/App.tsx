@@ -1,5 +1,5 @@
-import { For, lazy } from 'solid-js';
-import { Navigate, Route, Routes } from '@solidjs/router';
+import { For, lazy, Show } from 'solid-js';
+import { Navigate, Route, Routes, useMatch } from '@solidjs/router';
 import Navbar from '~/components/Navbar';
 import AppRoutes from '~/constants/Routes';
 import { currentTheme, daemonConfig } from '~/signals/persisted';
@@ -21,9 +21,12 @@ const routes = [
 ];
 
 function App() {
+	const duringSetup = useMatch(() => AppRoutes.Setup);
 	return (
 		<div data-theme={currentTheme()} class="w-full h-screen">
-			<Navbar />
+			<Show when={!duringSetup()}>
+				<Navbar />
+			</Show>
 			<div class="p-4">
 				<Routes>
 					<For each={routes}>
