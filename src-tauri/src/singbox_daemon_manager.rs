@@ -66,14 +66,14 @@ impl SingBox {
             return Err("Daemon path not set".to_string());
         };
 
+        self.kill_process()?;
+
         let daemon_path_hstring = HSTRING::from(daemon_path_ruststr);
         let daemon_path = PCWSTR::from_raw(daemon_path_hstring.as_ptr());
 
         let daemon_parameter_ruststr = format!("http://127.0.0.1:{}", listen_port);
         let daemon_parameter_hstring = HSTRING::from(daemon_parameter_ruststr);
         let daemon_parameter = PCWSTR::from_raw(daemon_parameter_hstring.as_ptr());
-
-        self.kill_process()?;
 
         let mut shell_execute_info = SHELLEXECUTEINFOW::default();
         shell_execute_info.lpVerb = w!("runas");
