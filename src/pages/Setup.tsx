@@ -1,6 +1,9 @@
 import { createSignal, createMemo } from 'solid-js';
-import { event, dialog, os } from '@tauri-apps/api';
+import { useNavigate } from '@solidjs/router';
+import { invoke, dialog, os } from '@tauri-apps/api';
 import { setDaemonConfig } from '~/signals/persisted';
+import TrivialErrorModal from '~/components/TrivialErrorModal.tsx';
+import Routes from '~/constants/Routes.ts';
 
 function randomPort() {
 	return Math.floor(Math.random() * 62_535) + 3000;
@@ -14,9 +17,13 @@ function Setup() {
 		listenPort: daemonPort(),
 		runOnStart: true,
 	}));
+	const [errorMessage, setErrorMessage] = createSignal('');
+	const navigate = useNavigate();
+	let errorDialog: HTMLDialogElement | undefined;
 
 	return (
 		<div class="flex place-content-center items-center w-full h-full">
+			<TrivialErrorModal ref={errorDialog} errorMessage={errorMessage()} />
 			<div class="card bg-base-200 shadow-lg w-fit px-5 py-4">
 				<h2 class="card-title">Setup</h2>
 				<div class="card-body">
@@ -92,12 +99,61 @@ function Setup() {
 						type="button"
 						class="btn btn-primary"
 						onClick={() => {
+							if (!daemonPath().trim()) {
+								setErrorMessage('Please select a sing-box binary!');
+								errorDialog!.showModal();
+								return;
+							}
+
 							setDaemonConfig(daemonConfig());
+							invoke('set_singbox_daemon_params', {
+								listenPort: daemonConfig().listenPort,
+								daemonPath: daemonConfig().daemonPath,
+							}).then(
+								(_) => {
+									navigate(Routes.Dashboard);
+								},
+								(error) => {
+									// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+									setErrorMessage(error.toString());
+									errorDialog!.showModal();
+								}
+							);
 						}}
 					>
 						Save
 					</button>
-					<button type="button" class="btn btn-success">
+					<button
+						type="button"
+						class="btn btn-success"
+						onClick={() => {
+							if (!daemonPath().trim()) {
+								setErrorMessage('Please select a sing-box binary!');
+								errorDialog!.showModal();
+								return;
+							}
+
+							setDaemonConfig(daemonConfig());
+							invoke('set_singbox_daemon_params', {
+								listenPort: daemonConfig().listenPort,
+								daemonPath: daemonConfig().daemonPath,
+							}).catch((error) => {
+								// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+								setErrorMessage(error.toString());
+								errorDialog!.showModal();
+							});
+							invoke('start_singbox_daemon').then(
+								(_) => {
+									navigate(Routes.Dashboard);
+								},
+								(error) => {
+									// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+									setErrorMessage(error.toString());
+									errorDialog!.showModal();
+								}
+							);
+						}}
+					>
 						Start
 					</button>
 				</div>
