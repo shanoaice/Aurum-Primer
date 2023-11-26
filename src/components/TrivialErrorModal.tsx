@@ -1,10 +1,12 @@
-import { type ParentComponent } from 'solid-js';
+import { type Component, For } from 'solid-js';
 
-type TrivivalErrorModalProps = {
+type TrivialErrorModalProps = {
 	ref: HTMLDialogElement | undefined;
+	errorMessage: string;
 };
 
-const TrivialErrorModal: ParentComponent<TrivivalErrorModalProps> = (props) => {
+const TrivialErrorModal: Component<TrivialErrorModalProps> = (props) => {
+	const errorMessageLines = props.errorMessage.split('\n');
 	return (
 		<dialog class="modal border-double border-4 border-error" ref={props.ref}>
 			<div class="modal-box">
@@ -14,7 +16,19 @@ const TrivialErrorModal: ParentComponent<TrivivalErrorModalProps> = (props) => {
 						type="submit"
 					/>
 				</form>
-				{props.children}
+				<div role="alert" class="alert alert-error">
+					<span
+						class="iconify"
+						data-icon="fluent:error-circle-24-filled"
+						data-inline="false"
+					/>
+					<span>An Error Has Occurred!</span>
+					<pre class="p-4 bg-base-300">
+						<For each={errorMessageLines}>
+							{(errorMessage) => <code>{errorMessage}</code>}
+						</For>
+					</pre>
+				</div>
 			</div>
 			<form method="dialog" class="modal-backdrop">
 				<button type="submit">close</button>
