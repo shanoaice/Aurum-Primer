@@ -6,7 +6,6 @@ type TrivialErrorModalProps = {
 };
 
 const TrivialErrorModal: Component<TrivialErrorModalProps> = (props) => {
-	const errorMessageLines = props.errorMessage.split('\n');
 	return (
 		<dialog class="modal border-double border-4 border-error" ref={props.ref}>
 			<div class="modal-box">
@@ -24,7 +23,7 @@ const TrivialErrorModal: Component<TrivialErrorModalProps> = (props) => {
 					/>
 					<span>An Error Has Occurred!</span>
 					<pre class="p-4 bg-base-300">
-						<For each={errorMessageLines}>
+						<For each={props.errorMessage.split('\n')}>
 							{(errorMessage) => <code>{errorMessage}</code>}
 						</For>
 					</pre>
