@@ -15,14 +15,15 @@ const TrivialErrorModal: Component<TrivialErrorModalProps> = (props) => {
 						type="submit"
 					/>
 				</form>
-				<div role="alert" class="alert alert-error">
-					<span
-						class="iconify"
-						data-icon="fluent:error-circle-24-filled"
-						data-inline="false"
-					/>
-					<span>An Error Has Occurred!</span>
-					<pre class="p-4 bg-base-300">
+				<div class="flex flex-col">
+					<div role="alert" class="alert alert-error">
+						<span
+							class="icon-[fluent--error-circle-24-regular]"
+							data-inline="false"
+						/>
+						<span class="font-bold">An Error Has Occurred!</span>
+					</div>
+					<pre class="p-4 bg-base-300 rounded-box">
 						<For each={props.errorMessage.split('\n')}>
 							{(errorMessage) => <code>{errorMessage}</code>}
 						</For>
