@@ -20,6 +20,7 @@
     "@tanstack/solid-virtual": "^3.0.0-beta.68",
     "@tauri-apps/api": "^1.5.1",
     "@zag-js/solid": "^0.27.1",
+    "@zag-js/toast": "^0.30.0",
     "apexcharts": "^3.44.0",
     "daisyui": "^4.0.1",
     "nanostores": "^0.9.5",

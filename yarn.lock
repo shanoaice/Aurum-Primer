@@ -1693,6 +1693,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zag-js/anatomy@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/anatomy@npm:0.30.0"
+  checksum: 57569aec6bc353a75a789ef6f77f806730e91b3ff9c573c0b7171ae0d3f996ea0b43d48c686dfd1c6c7e426251eba7ced22b219ee8ce2d563219e99bbf9a3ce9
+  languageName: node
+  linkType: hard
+
 "@zag-js/core@npm:0.27.1":
   version: 0.27.1
   resolution: "@zag-js/core@npm:0.27.1"
@@ -1700,6 +1707,33 @@ __metadata:
     "@zag-js/store": "npm:0.27.1"
     klona: "npm:2.0.6"
   checksum: ad4d1d2874ba351db67a4284d7f1073d7e22d8a192dcc91325a7c8195b6d2c4200ca0f2a0eb3a869ebc840eb1bbca4fdce51268fd74a2433d546898a574e1d68
+  languageName: node
+  linkType: hard
+
+"@zag-js/core@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/core@npm:0.30.0"
+  dependencies:
+    "@zag-js/store": "npm:0.30.0"
+    klona: "npm:2.0.6"
+  checksum: e3ef1ee8b6cb253a5ae334921587495c7b3301883ee6aea3240b747fcf920c779e28ee80341fe6472348edf95a060c7c535b22d7783647d39e606f4ff1f60975
+  languageName: node
+  linkType: hard
+
+"@zag-js/dom-event@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/dom-event@npm:0.30.0"
+  dependencies:
+    "@zag-js/text-selection": "npm:0.30.0"
+    "@zag-js/types": "npm:0.30.0"
+  checksum: dc8e3b8b4c922bf1004c805acc79a996c84babde5264ac8160baf3728bfc322fbb9f7dec0bac48933d9a2e0612494596d9a6440385a60e6ccf19c9683231dad2
+  languageName: node
+  linkType: hard
+
+"@zag-js/dom-query@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/dom-query@npm:0.30.0"
+  checksum: a4452db025c9108da9ab2d1c255b6d940083bf1722d43a9257426a3e2b8921704fdd39631e36d0aac60291e8af93e11d0477c307de5cd09a588005b87e26474f
   languageName: node
   linkType: hard
 
@@ -1726,12 +1760,60 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zag-js/store@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/store@npm:0.30.0"
+  dependencies:
+    proxy-compare: "npm:2.5.1"
+  checksum: 8a1592ec58973049bb46c6b713945b78afa1cffdf00aa318ffc30dfa488e22ae3d2d1b5dc641c71d8b027b13bf8e8f1c8b1b8fb589f8ed59bfc030f2a7b83e04
+  languageName: node
+  linkType: hard
+
+"@zag-js/text-selection@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/text-selection@npm:0.30.0"
+  dependencies:
+    "@zag-js/dom-query": "npm:0.30.0"
+  checksum: 9e56ff0f8223e0df7b454f17e855d9310732e4bb2b6541480b8e5fd922a2a803d608ac6d79704d2fec050245f452f5e5edb6b2e30655c48c52ff3eed3843b294
+  languageName: node
+  linkType: hard
+
+"@zag-js/toast@npm:^0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/toast@npm:0.30.0"
+  dependencies:
+    "@zag-js/anatomy": "npm:0.30.0"
+    "@zag-js/core": "npm:0.30.0"
+    "@zag-js/dom-event": "npm:0.30.0"
+    "@zag-js/dom-query": "npm:0.30.0"
+    "@zag-js/types": "npm:0.30.0"
+    "@zag-js/utils": "npm:0.30.0"
+  checksum: 2f0dee6169a77d276d8ea8654edd1e5f42415262ba39ac4ef5241bb38e4406722cddbee514180efc4696a38ec06200029c15d0f39f6b510c4eec991a16625bad
+  languageName: node
+  linkType: hard
+
 "@zag-js/types@npm:0.27.1":
   version: 0.27.1
   resolution: "@zag-js/types@npm:0.27.1"
   dependencies:
     csstype: "npm:3.1.2"
   checksum: be5298e317a3098c73f18ae7e2586969db4fe818c4e763d4df220729d9788f259ebcf5c335553882d4e22fc81d2b10c24255276264512af6332ee59f3c19b3ac
+  languageName: node
+  linkType: hard
+
+"@zag-js/types@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/types@npm:0.30.0"
+  dependencies:
+    csstype: "npm:3.1.2"
+  checksum: ac3e6ba99190c4f67ed3ebcf2f29f9fddfa5a4be192b1e3492d90d706e767d529aef2c6db6ea43cf1a848d902715dbe1d66ed92ee21acbb39dde505a04439e29
+  languageName: node
+  linkType: hard
+
+"@zag-js/utils@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@zag-js/utils@npm:0.30.0"
+  checksum: ee36c28ef9b01cfa5a2cb38769cd4c287d92165ee42e7536461a3df87c31f93aa2ae289eb509ad1824ff3f5fe09b177faef92f8c816ca2f3227a3c8399f89b76
   languageName: node
   linkType: hard
 
@@ -2006,6 +2088,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^6.9.1"
     "@typescript-eslint/parser": "npm:^6.9.1"
     "@zag-js/solid": "npm:^0.27.1"
+    "@zag-js/toast": "npm:^0.30.0"
     apexcharts: "npm:^3.44.0"
     autoprefixer: "npm:^10.4.16"
     daisyui: "npm:^4.0.1"
