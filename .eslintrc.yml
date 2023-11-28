@@ -7,7 +7,6 @@ extends:
   - plugin:import/typescript
   - plugin:solid/typescript
   - plugin:jsx-a11y/recommended
-  - plugin:prettier/recommended
 
 settings:
   import/resolver:
