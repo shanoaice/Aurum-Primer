@@ -109,11 +109,11 @@ const Navbar = () => {
 	];
 
 	return (
-		<div class="navbar px-4 bg-base-200">
+		<header class="navbar px-4 bg-base-200">
 			<div class="navbar-start">
 				<LogoText />
 			</div>
-			<div class="navbar-center">
+			<nav class="navbar-center">
 				<ul class="menu menu-horizontal menu-lg gap-2">
 					<For each={navs()}>
 						{(nav) => (
@@ -123,13 +123,13 @@ const Navbar = () => {
 						)}
 					</For>
 				</ul>
-			</div>
+			</nav>
 			<div class="navbar-end flex justify-end">
 				<div>
 					<ThemeChanger />
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 
