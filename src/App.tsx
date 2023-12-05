@@ -27,7 +27,7 @@ function App() {
 			<Show when={!duringSetup()}>
 				<Navbar />
 			</Show>
-			<div class="p-4 w-full h-full">
+			<div class="p-4 w-full h-max">
 				<Routes>
 					<For each={routes}>
 						{(route) => <Route path={route.path} component={route.component} />}
