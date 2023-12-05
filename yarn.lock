@@ -1505,6 +1505,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/byte-size@npm:^8":
+  version: 8.1.2
+  resolution: "@types/byte-size@npm:8.1.2"
+  checksum: 2a251414d925e02a4b36629c2ea0519efb5006baa82241ae85fdfebb65f43d3679c486e247ff6b82e4fbbac556b9d55adf7c0f254e16d6b1d972ffb96d47b8f2
+  languageName: node
+  linkType: hard
+
 "@types/eslint@npm:^8":
   version: 8.44.6
   resolution: "@types/eslint@npm:8.44.6"
@@ -1540,6 +1547,13 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 6bf5337bc447b706bb5b4431d37686aa2ea6d07cfd6f79cc31de80170d6ff9b1c7384a9c0ccbc45b3f512bae9e9f75c2e12109806a15331dc94e8a8db6dbb4ac
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4":
+  version: 4.14.202
+  resolution: "@types/lodash@npm:4.14.202"
+  checksum: 6064d43c8f454170841bd67c8266cc9069d9e570a72ca63f06bceb484cb4a3ee60c9c1f305c1b9e3a87826049fd41124b8ef265c4dd08b00f6766609c7fe9973
   languageName: node
   linkType: hard
 
@@ -2084,13 +2098,16 @@ __metadata:
     "@tauri-apps/api": "npm:^1.5.1"
     "@tauri-apps/cli": "npm:^1.5.6"
     "@types/babel__core": "npm:^7"
+    "@types/byte-size": "npm:^8"
     "@types/eslint": "npm:^8"
+    "@types/lodash": "npm:^4"
     "@typescript-eslint/eslint-plugin": "npm:^6.9.1"
     "@typescript-eslint/parser": "npm:^6.9.1"
     "@zag-js/solid": "npm:^0.27.1"
     "@zag-js/toast": "npm:^0.30.0"
     apexcharts: "npm:^3.44.0"
     autoprefixer: "npm:^10.4.16"
+    byte-size: "npm:^8.1.1"
     daisyui: "npm:^4.0.1"
     eslint: "npm:^8.53.0"
     eslint-config-prettier: "npm:^9.0.0"
@@ -2104,6 +2121,7 @@ __metadata:
     eslint-plugin-solid: "npm:^0.13.0"
     eslint-plugin-unicorn: "npm:^49.0.0"
     lightningcss: "npm:^1.22.1"
+    lodash: "npm:^4.17.21"
     nanostores: "npm:^0.9.5"
     postcss: "npm:^8.4.31"
     prettier: "npm:^3.0.3"
@@ -2273,6 +2291,13 @@ __metadata:
   dependencies:
     run-applescript: "npm:^5.0.0"
   checksum: 57bc7f8b025d83961b04db2f1eff6a87f2363c2891f3542a4b82471ff8ebb5d484af48e9784fcdb28ef1d48bb01f03d891966dc3ef58758e46ea32d750ce40f8
+  languageName: node
+  linkType: hard
+
+"byte-size@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "byte-size@npm:8.1.1"
+  checksum: 83170a16820fde48ebaef93bf6b2e86c5f72041f76e44eba1f3c738cceb699aeadf11088198944d5d7c6f970b465ab1e3dddc2e60bfb49a74374f3447a8db5b9
   languageName: node
   linkType: hard
 
@@ -4569,6 +4594,13 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: 402fa16a1edd7538de5b5903a90228aa48eb5533986ba7fa26606a49db2572bf414ff73a2c9f5d5fd36b31c46a5d5c7e1527749c07cbcf965ccff5fbdf32c506
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
   languageName: node
   linkType: hard
 
