@@ -1,5 +1,10 @@
 import { createMemo, createSignal, onCleanup } from 'solid-js';
+import { merge } from 'lodash';
+import byteSize from 'byte-size';
 import { event } from '@tauri-apps/api';
+import type { ApexOptions } from 'apexcharts';
+import { SolidApexCharts } from 'solid-apexcharts';
+import { DEFAULT_CHART_OPTIONS } from '~/constants';
 
 type DaemonStatus = {
 	memory: number;
@@ -14,44 +19,6 @@ type DaemonStatus = {
 	downlinkTotal: number;
 };
 
-const SizeBreakpoints = {
-	kb: 1024,
-	mb: 1024 * 1024,
-	gb: 1024 * 1024 * 1024,
-};
-
-function calcSpeedFromBytes(bytes: number) {
-	if (bytes > SizeBreakpoints.gb) {
-		return `${(bytes / SizeBreakpoints.gb).toFixed(2)} GB/s`;
-	}
-
-	if (bytes > SizeBreakpoints.mb) {
-		return `${(bytes / SizeBreakpoints.mb).toFixed(2)} MB/s`;
-	}
-
-	if (bytes > SizeBreakpoints.kb) {
-		return `${(bytes / SizeBreakpoints.kb).toFixed(2)} KB/s`;
-	}
-
-	return `${bytes} B/s`;
-}
-
-function calcTotalFromBytes(bytes: number) {
-	if (bytes > SizeBreakpoints.gb) {
-		return `${(bytes / SizeBreakpoints.gb).toFixed(2)} GB`;
-	}
-
-	if (bytes > SizeBreakpoints.mb) {
-		return `${(bytes / SizeBreakpoints.mb).toFixed(2)} MB`;
-	}
-
-	if (bytes > SizeBreakpoints.kb) {
-		return `${(bytes / SizeBreakpoints.kb).toFixed(2)} KB`;
-	}
-
-	return `${bytes} B`;
-}
-
 function Dashboard() {
 	const [daemonStatus, setDaemonStatus] = createSignal<DaemonStatus>({
 		memory: 0,
@@ -65,27 +32,27 @@ function Dashboard() {
 		uplinkTotal: 0,
 		downlinkTotal: 0,
 	});
-	const downlinkSpeed = createMemo(() =>
-		calcSpeedFromBytes(daemonStatus().downlink)
+	const downlinkSpeed = createMemo(
+		() => `${byteSize(daemonStatus().downlink).toString()}/s`
 	);
-	const uplinkSpeed = createMemo(() =>
-		calcSpeedFromBytes(daemonStatus().uplink)
+	const uplinkSpeed = createMemo(
+		() => `${byteSize(daemonStatus().uplink).toString()}/s`
 	);
 	const downlinkTotal = createMemo(() =>
-		calcTotalFromBytes(daemonStatus().downlinkTotal)
+		byteSize(daemonStatus().downlinkTotal).toString()
 	);
 	const uplinkTotal = createMemo(() =>
-		calcTotalFromBytes(daemonStatus().uplinkTotal)
+		byteSize(daemonStatus().uplinkTotal).toString()
 	);
 	const activeConns = createMemo(
 		() => daemonStatus().connectionsIn + daemonStatus().connectionsOut
 	);
 	const memoryUsage = createMemo(() =>
-		calcTotalFromBytes(daemonStatus().memoryInuse)
+		byteSize(daemonStatus().memoryInuse).toString()
 	);
 
 	const downlinkDatasets = createMemo<number[]>((previousDataset) => {
-		if (previousDataset.length > 8) {
+		if (previousDataset.length > 10) {
 			previousDataset.shift();
 		}
 
@@ -94,13 +61,48 @@ function Dashboard() {
 	}, []);
 
 	const uplinkDatasets = createMemo<number[]>((previousDataset) => {
-		if (previousDataset.length > 8) {
+		if (previousDataset.length > 10) {
 			previousDataset.shift();
 		}
 
 		previousDataset.push(daemonStatus().uplink);
 		return previousDataset;
 	}, []);
+
+	const memoryDatasets = createMemo<number[]>((previousDataset) => {
+		if (previousDataset.length > 10) {
+			previousDataset.shift();
+		}
+
+		previousDataset.push(daemonStatus().memoryInuse);
+		return previousDataset;
+	}, []);
+
+	const trafficChartOptions = createMemo<ApexOptions>(() =>
+		merge({ title: { text: 'Traffic' } }, DEFAULT_CHART_OPTIONS)
+	);
+
+	const trafficChartSeries = createMemo(() => [
+		{
+			name: 'Download',
+			data: downlinkDatasets(),
+		},
+		{
+			name: 'Upload',
+			data: uplinkDatasets(),
+		},
+	]);
+
+	const memoryChartOptions = createMemo<ApexOptions>(() =>
+		merge({ title: { text: 'Memory' } }, DEFAULT_CHART_OPTIONS)
+	);
+
+	const memoryChartSeries = createMemo(() => [
+		{
+			name: 'Memory',
+			data: memoryDatasets(),
+		},
+	]);
 
 	const unsubscribeDaemonStatusPromise = event
 		.listen<DaemonStatus>('status', (event) => {
@@ -119,7 +121,7 @@ function Dashboard() {
 	});
 
 	return (
-		<div class="flex flex-col p-1 gap-0.5">
+		<div class="flex flex-col p-1 gap-4">
 			<div class="rounded-box shadow-md bg-base-300 stats stats-vertical grid-cols-2 lg:stats-horizontal lg:flex">
 				<div class="stat">
 					<div class="stat-title">Upload</div>
@@ -144,6 +146,22 @@ function Dashboard() {
 				<div class="stat">
 					<div class="stat-title">Memory Usage</div>
 					<div class="stat-value">{memoryUsage()}</div>
+				</div>
+			</div>
+			<div class="flex flex-col lg:flex-row gap-2 rounded-box bg-base-300 p-2">
+				<div class="flex-1">
+					<SolidApexCharts
+						type="area"
+						series={trafficChartSeries()}
+						options={trafficChartOptions()}
+					/>
+				</div>
+				<div class="flex-1">
+					<SolidApexCharts
+						type="area"
+						series={memoryChartSeries()}
+						options={memoryChartOptions()}
+					/>
 				</div>
 			</div>
 		</div>
