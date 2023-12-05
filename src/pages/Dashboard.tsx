@@ -120,7 +120,7 @@ function Dashboard() {
 
 	return (
 		<div class="flex flex-col p-1 gap-0.5">
-			<div class="rounded-box shadow-md bg-base-300 stats">
+			<div class="rounded-box shadow-md bg-base-300 stats stats-vertical grid-cols-2 lg:stats-horizontal lg:flex">
 				<div class="stat">
 					<div class="stat-title">Upload</div>
 					<div class="stat-value">{uplinkSpeed()}</div>
