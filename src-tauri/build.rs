@@ -19,6 +19,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ".daemon.Status",
             "#[derive(serde::Serialize)] #[serde(rename_all = \"camelCase\")]",
         )
-				.compile(&["proto/sing-box-daemon.proto"], &["proto"])?;
+        .compile(&["proto/sing-box-daemon.proto"], &["proto"])?;
     Ok(())
 }
