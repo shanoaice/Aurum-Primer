@@ -1,8 +1,8 @@
 # Build Instructions
 
-## Prerequsites
+## Prerequisites
 
-Please refer to Tauri's [Prerequsities](https://tauri.app/v1/guides/getting-started/prerequisites) page. You can whether it is met by running `yarn tauri info` in the root directory of this project, after you have bootstrapped dependencies (as in the [Frontend](#frontend) section).
+Please refer to Tauri's [Prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites) page. You can check whether it is met by running `yarn tauri info` in the root directory of this project, after you have bootstrapped dependencies (as in the [Frontend](#frontend) section).
 
 ## Frontend
 
@@ -14,13 +14,7 @@ yarn install
 
 to prepare the dependencies. Since the project uses Tauri, normally you shouldn't need to build the frontend independently, but if you need to `yarn build` will suffice. 
 
-To prepare editor SDKs for development as this project uses Yarn PnP, run:
-
-```bash
-yarn dlx @yarnpkg/sdks vscode # or vim if you uses Vim/NeoVim
-```
-
-and allow VSCode to use workspace TypeScript version in the editor prompt.
+Due to compatibility issues with JetBrains IDE, this project does not use Yarn PnP, thus Editor SDK is not needed.
 
 ## Backend
 
