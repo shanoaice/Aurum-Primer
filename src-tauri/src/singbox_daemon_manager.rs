@@ -103,7 +103,12 @@ impl SingBox {
     // neither do I have a macOS device to test it out
     // if somebody has relevant knowledge, contribution is welcomed
     // TODO: Unix impl of start_process
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(target_os = "linux")]
+    pub fn start_process(&self) -> Result<(), String> {
+        Ok(())
+    }
+
+    #[cfg(target_os = "macos")]
     pub fn start_process(&self) -> Result<(), String> {
         Ok(())
     }
