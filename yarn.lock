@@ -840,25 +840,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nanostores/persistent@npm:^0.9.1":
-  version: 0.9.1
-  resolution: "@nanostores/persistent@npm:0.9.1"
-  peerDependencies:
-    nanostores: ^0.9.0
-  checksum: 16b289c697d5a04319d5d85e04f0d03f039795a8ba2ef6e331fe936c90f13b79b6940cd34950cadf86799c1a8477966eb752d1d38066a14a3ed181d3e2c2486b
-  languageName: node
-  linkType: hard
-
-"@nanostores/solid@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "@nanostores/solid@npm:0.4.2"
-  peerDependencies:
-    nanostores: ">=0.8.0"
-    solid-js: ^1.6.0
-  checksum: 7b75bdc73c1c278f32380a2628018b70cdb1976df9da87337f6b276c8c2326275b3179bafe3c05b956f4427f12581c862e8399b408ce94cba53a98129512f095
-  languageName: node
-  linkType: hard
-
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -2256,8 +2237,6 @@ __metadata:
     "@babel/plugin-syntax-typescript": "npm:^7.23.3"
     "@iconify-json/fluent": "npm:^1.1.40"
     "@iconify/tailwind": "npm:^0.1.3"
-    "@nanostores/persistent": "npm:^0.9.1"
-    "@nanostores/solid": "npm:^0.4.2"
     "@solid-devtools/overlay": "npm:^0.29.2"
     "@solid-primitives/event-listener": "npm:^2.3.0"
     "@solid-primitives/storage": "npm:^2.1.1"
@@ -2293,12 +2272,12 @@ __metadata:
     eslint-plugin-unicorn: "npm:^49.0.0"
     lightningcss: "npm:^1.22.1"
     lodash: "npm:^4.17.21"
-    nanostores: "npm:^0.9.5"
     postcss: "npm:^8.4.31"
     prettier: "npm:^3.0.3"
     solid-apexcharts: "npm:^0.3.2"
     solid-devtools: "npm:^0.29.2"
     solid-js: "npm:^1.7.8"
+    solid-zustand: "npm:^1.7.1"
     tailwindcss: "npm:^3.3.5"
     tauri-plugin-store-api: "https://github.com/tauri-apps/tauri-plugin-store#v1"
     theme-change: "npm:^2.5.0"
@@ -2307,6 +2286,7 @@ __metadata:
     vite: "npm:^4.4.5"
     vite-plugin-solid: "npm:^2.7.0"
     yaml: "npm:^2.3.4"
+    zustand: "npm:^4.4.7"
   languageName: unknown
   linkType: soft
 
@@ -5032,13 +5012,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanostores@npm:^0.9.5":
-  version: 0.9.5
-  resolution: "nanostores@npm:0.9.5"
-  checksum: 5d6a33647428bd3adcd4ddb2745a01420eae3cc1c3c49e48c307b078152603a26ac78f25d30d17f3c4e51b43ee18e2fcd5b80a8c704336366cbcc86a5d5210b5
-  languageName: node
-  linkType: hard
-
 "natural-compare@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
@@ -6009,6 +5982,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"solid-zustand@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "solid-zustand@npm:1.7.1"
+  peerDependencies:
+    solid-js: ^1.6.0
+    zustand: ^4.3.0
+  checksum: d69b48dbb5040cc74f376c0bbca6c9839eb6ca3e8b1d27110c7887dfc56438250a67c5a348b3f899721848e25e9d026f1a172f8b78eb65991d59ed87ee9470be
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
@@ -6637,6 +6620,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-sync-external-store@npm:1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: ac4814e5592524f242921157e791b022efe36e451fe0d4fd4d204322d5433a4fc300d63b0ade5185f8e0735ded044c70bcf6d2352db0f74d097a238cebd2da02
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.2":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -6879,5 +6871,25 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.4.7":
+  version: 4.4.7
+  resolution: "zustand@npm:4.4.7"
+  dependencies:
+    use-sync-external-store: "npm:1.2.0"
+  peerDependencies:
+    "@types/react": ">=16.8"
+    immer: ">=9.0"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: de507f09eb79039d74d282df6ffac6c7fb6b840ca3620b0392bcbe3f9049902802db5448b4002e6fcb32f903f7ec1aea14602049eb2a3a8410bfea7186d72fb7
   languageName: node
   linkType: hard
