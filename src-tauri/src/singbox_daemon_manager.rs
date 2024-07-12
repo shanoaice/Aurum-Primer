@@ -9,6 +9,9 @@ pub union SingBoxProcess {
     unix: ManuallyDrop<Child>,
 }
 
+// Passing structs between async func needs to be thread safe
+// Mutex is the simplest way to do it
+// This is not a hot code path, so no performance concern
 pub struct SingBox {
     process: Mutex<Option<SingBoxProcess>>,
     listen_port: Mutex<Option<u16>>,
@@ -32,7 +35,10 @@ impl SingBox {
         match &mut *singbox_process {
             None => Ok(()),
             Some(process) => unsafe {
+                // This is almost certainly safe, since this code path should not be ran on Unix
                 let singbox_handle = process.windows;
+
+                // if this handle is invalid, the process is likely already dead
                 if singbox_handle.is_invalid() {
                     return Ok(());
                 };
@@ -76,10 +82,13 @@ impl SingBox {
         let daemon_parameter = PCWSTR::from_raw(daemon_parameter_hstring.as_ptr());
 
         let mut shell_execute_info = SHELLEXECUTEINFOW::default();
+        // "runas" = run as Admin, triggers UAC
         shell_execute_info.lpVerb = w!("runas");
         shell_execute_info.lpFile = daemon_path;
         shell_execute_info.lpParameters = daemon_parameter;
         shell_execute_info.nShow = SW_SHOWDEFAULT.0;
+        // NOCLOSEPROCESS tells ShellExecuteExW to return the process Handle
+        // NO_CONSOLE hides the console window
         shell_execute_info.fMask = SEE_MASK_NOCLOSEPROCESS | SEE_MASK_NO_CONSOLE;
         shell_execute_info.cbSize = std::mem::size_of::<SHELLEXECUTEINFOW>() as u32;
 
@@ -87,6 +96,7 @@ impl SingBox {
             ShellExecuteExW(&mut shell_execute_info).map_err(|e| e.to_string())?;
         }
 
+        // store the process handle 
         *self.process.lock().map_err(|op| op.to_string())? = Some(SingBoxProcess {
             windows: shell_execute_info.hProcess,
         });
