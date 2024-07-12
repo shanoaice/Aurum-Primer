@@ -39,12 +39,13 @@ impl SingBox {
                 let singbox_handle = process.windows;
 
                 // if this handle is invalid, the process is likely already dead
-                if singbox_handle.is_invalid() {
-                    return Ok(());
+                // thus we only terminate it when the handle is valid
+                if !singbox_handle.is_invalid() {
+                    TerminateProcess(singbox_handle, 0).map_err(|e| e.to_string())?;
                 };
 
-                TerminateProcess(singbox_handle, 0).map_err(|e| e.to_string())?;
-
+                // if handle is invalid it is also useless whatsoever
+                // thus we always set it to None regardlessly
                 *singbox_process = None;
 
                 Ok(())
@@ -96,7 +97,7 @@ impl SingBox {
             ShellExecuteExW(&mut shell_execute_info).map_err(|e| e.to_string())?;
         }
 
-        // store the process handle 
+        // store the process handle
         *self.process.lock().map_err(|op| op.to_string())? = Some(SingBoxProcess {
             windows: shell_execute_info.hProcess,
         });
