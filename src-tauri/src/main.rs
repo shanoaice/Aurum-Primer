@@ -6,10 +6,8 @@ use singbox_daemon_client::{singbox_daemon_client_main, WebpageEvents};
 use singbox_daemon_manager::SingBox;
 use tauri::{AppHandle, Manager};
 
-mod compio_unix_stream_wrapper;
 mod random_cidr_generator;
 mod singbox_daemon_client;
-mod singbox_daemon_client_uds;
 mod singbox_daemon_manager;
 
 async fn async_error_handler(
