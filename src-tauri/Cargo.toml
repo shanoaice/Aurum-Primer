@@ -29,10 +29,10 @@ rustix = { version = "0.38.21", features = ["process"] }
 rand = "0.8.5"
 tonic = { version = "0.10.2", features = ["prost"] }
 prost = "0.12.1"
-compio = { git = "https://github.com/compio-rs/compio", branch = "master" }
-compio-http = { git = "https://github.com/compio-rs/compio", branch = "master" }
-compio-buf = { git = "https://github.com/compio-rs/compio", branch = "master" }
-compio-io = { git = "https://github.com/compio-rs/compio", branch = "master" }
+compio = { version = "0.11.0"}
+cyper = "0.1.0-beta.2"
+compio-buf = { version = "0.4.0"}
+compio-io = { version = "0.3.0"}
 kanal = "0.1.0-pre8"
 tower = { version = "0.4.13", features = ["full"] }
 send_wrapper = { version = "0.6.0", features = ["futures"] }
